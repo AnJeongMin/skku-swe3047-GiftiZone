@@ -23,6 +23,12 @@ class GifticonListActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_gifticon_list)
 
+        setupTagModal()
+        setupTagRecycleView()
+        setupDropdown()
+    }
+
+    private fun setupTagModal() {
         val tagAddBtn = findViewById<ImageButton>(R.id.TagAddButton)
         tagAddBtn.setOnClickListener {
             val tagModal = TagModal(this) { tag ->
@@ -30,13 +36,13 @@ class GifticonListActivity : AppCompatActivity() {
             }
             tagModal.show()
         }
+    }
 
+    private fun setupTagRecycleView() {
         val tagListView = findViewById<RecyclerView>(R.id.tagListView)
         val layoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
         tagListView.layoutManager = layoutManager
         tagListView.adapter = TagAdapter(tagList, selectedTag)
-
-        setupDropdown()
     }
 
     private fun setupDropdown() {
