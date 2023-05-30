@@ -44,16 +44,13 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editTextTag" />
 
-    <Button
+    <ImageButton
         android:id="@+id/cancelTagButton"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:background="@android:color/transparent"
-        android:fallbackLineSpacing="true"
-        android:text="X"
-        android:textColor="@color/black"
-        android:textSize="20sp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/baseline_cancel_24" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

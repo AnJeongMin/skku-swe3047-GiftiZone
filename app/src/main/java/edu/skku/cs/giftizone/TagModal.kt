@@ -1,10 +1,10 @@
 package edu.skku.cs.giftizone
 
 import android.content.Context
-import android.util.Log
 import android.view.LayoutInflater
 import android.widget.Button
 import android.widget.EditText
+import android.widget.ImageButton
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 
@@ -13,9 +13,9 @@ class TagModal(
     private val addTagHandler: (String) -> Unit
 ) {
     private val inflater = LayoutInflater.from(context)
-    private val dialogLayout = inflater.inflate(R.layout.dialog_layout, null)
+    private val dialogLayout = inflater.inflate(R.layout.tag_dialog_layout, null)
     private val confirmTagBtn = dialogLayout.findViewById<Button>(R.id.confirmTagButton)
-    private val cancelTagBtn = dialogLayout.findViewById<Button>(R.id.cancelTagButton)
+    private val cancelTagBtn = dialogLayout.findViewById<ImageButton>(R.id.cancelTagButton)
     private val editTextTag = dialogLayout.findViewById<EditText>(R.id.editTextTag)
 
     private val tagDialog = AlertDialog.Builder(context).create()
