@@ -1,6 +1,7 @@
 package edu.skku.cs.giftizone
 
 import android.content.Context
+import android.util.Log
 import android.view.LayoutInflater
 import android.widget.Button
 import android.widget.EditText
@@ -9,7 +10,7 @@ import androidx.appcompat.app.AlertDialog
 
 class TagModal(
     private val context: Context,
-    private val onConfirm: (String) -> Unit
+    private val addTagHandler: (String) -> Unit
 ) {
     private val inflater = LayoutInflater.from(context)
     private val dialogLayout = inflater.inflate(R.layout.dialog_layout, null)
@@ -27,7 +28,7 @@ class TagModal(
                 Toast.makeText(context, "태그를 입력해주세요.", Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
-            onConfirm(tag)
+            addTagHandler(tag)
             tagDialog.dismiss()
         }
         cancelTagBtn.setOnClickListener {
