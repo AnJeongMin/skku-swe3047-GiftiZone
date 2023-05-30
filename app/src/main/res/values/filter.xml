@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="gifticon_filter">
+        <item>유효 기간 순</item>
+        <item>등록 순</item>
+        <item>상품명 순</item>
+    </string-array>
+</resources>

@@ -23,9 +23,28 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
-        android:background="@color/white"
+        android:background="@android:color/transparent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/baseline_add_24" />
+
+
+    <FrameLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:background="@drawable/border_layout"
+        android:paddingLeft="12dp"
+        android:paddingTop="4dp"
+        android:paddingBottom="4dp"
+        app:layout_constraintStart_toStartOf="@+id/TagAddButton"
+        app:layout_constraintTop_toBottomOf="@+id/TagAddButton">
+
+        <Spinner
+            android:id="@+id/filterDropdown"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </FrameLayout>
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
