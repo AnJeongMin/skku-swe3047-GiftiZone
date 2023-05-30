@@ -1,4 +1,4 @@
-package edu.skku.cs.giftizone
+package edu.skku.cs.giftizone.gifticonList
 
 import android.content.Context
 import android.view.LayoutInflater
@@ -7,6 +7,7 @@ import android.widget.EditText
 import android.widget.ImageButton
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
+import edu.skku.cs.giftizone.R
 
 class TagModal(
     private val context: Context,

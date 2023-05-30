@@ -1,16 +1,15 @@
-package edu.skku.cs.giftizone
+package edu.skku.cs.giftizone.gifticonList
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
-import android.widget.Button
 import android.widget.ImageButton
 import android.widget.Spinner
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import edu.skku.cs.giftizone.R
 import edu.skku.cs.giftizone.enums.Filter
 
 class GifticonListActivity : AppCompatActivity() {
@@ -24,8 +23,10 @@ class GifticonListActivity : AppCompatActivity() {
         setContentView(R.layout.activity_gifticon_list)
 
         setupTagModal()
-        setupTagRecycleView()
         setupDropdown()
+
+        setupTagRecycleView()
+        setupGifticonRecycleView()
     }
 
     private fun setupTagModal() {
@@ -36,13 +37,6 @@ class GifticonListActivity : AppCompatActivity() {
             }
             tagModal.show()
         }
-    }
-
-    private fun setupTagRecycleView() {
-        val tagListView = findViewById<RecyclerView>(R.id.tagListView)
-        val layoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
-        tagListView.layoutManager = layoutManager
-        tagListView.adapter = TagAdapter(tagList, selectedTag)
     }
 
     private fun setupDropdown() {
@@ -65,5 +59,17 @@ class GifticonListActivity : AppCompatActivity() {
             adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
             filterDropdown.adapter = adapter
         }
+    }
+
+    private fun setupTagRecycleView() {
+        val tagListView = findViewById<RecyclerView>(R.id.tagListView)
+        val layoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
+        tagListView.layoutManager = layoutManager
+        tagListView.adapter = TagAdapter(tagList, selectedTag)
+    }
+
+    private fun setupGifticonRecycleView() {
+        val gifticonListView = findViewById<RecyclerView>(R.id.gifticonListView)
+        gifticonListView.adapter = TagAdapter(tagList, selectedTag)
     }
 }

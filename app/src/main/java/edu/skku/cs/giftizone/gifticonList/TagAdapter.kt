@@ -1,12 +1,12 @@
-package edu.skku.cs.giftizone
+package edu.skku.cs.giftizone.gifticonList
 
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
+import edu.skku.cs.giftizone.R
 
 class TagAdapter(private val tagList: ArrayList<String>, private val selectedTag: HashSet<String>) :
     RecyclerView.Adapter<TagAdapter.TagViewHolder>() {
