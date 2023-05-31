@@ -9,7 +9,10 @@ import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import edu.skku.cs.giftizone.R
 
-class TagAdapter(private val tagList: ArrayList<String>, private val selectedTag: HashSet<String>) :
+class TagAdapter(
+    private val tagList: ArrayList<String>,
+    private val selectedTag: HashSet<String>,
+    private val updateTagFiltering: () -> Unit):
     RecyclerView.Adapter<TagAdapter.TagViewHolder>() {
     private val MAX_SELECTED_TAG_COUNT = 3
 
@@ -32,6 +35,7 @@ class TagAdapter(private val tagList: ArrayList<String>, private val selectedTag
                     tagButton.setTextColor(ContextCompat.getColor(tagButton.context, R.color.white))
                     selectedTag.add(tag)
                 }
+                updateTagFiltering()
             }
         }
     }

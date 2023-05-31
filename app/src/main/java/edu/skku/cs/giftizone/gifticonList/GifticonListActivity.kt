@@ -11,7 +11,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import edu.skku.cs.giftizone.R
 import edu.skku.cs.giftizone.dataClass.Gifticon
-import edu.skku.cs.giftizone.enums.Filter
+import edu.skku.cs.giftizone.enums.SortFilter
 import java.time.LocalDate
 import java.time.temporal.ChronoUnit
 
@@ -22,11 +22,11 @@ class GifticonListActivity : AppCompatActivity() {
 
     private val tagList = arrayListOf("tag1", "tag2", "tag3")
     private val gifticonList = arrayListOf(Gifticon("", "123-123", "tag1", "BBQ", "황올1", LocalDate.now().plus(1, ChronoUnit.WEEKS)),
-    Gifticon("", "123-123", "tag2", "BBQ", "황올2", LocalDate.now().plus(-1, ChronoUnit.WEEKS)),
-    Gifticon("", "123-123", "tag3", "BBQ", "황올3", LocalDate.now().plus(1, ChronoUnit.WEEKS)))
+    Gifticon("", "123-123", "tag2", "BBQ", "황올2", LocalDate.now().plus(-3, ChronoUnit.WEEKS), LocalDate.now().plus(-3, ChronoUnit.DAYS)),
+    Gifticon("", "123-123", "tag3", "BBQ", "황올3", LocalDate.now().plus(1, ChronoUnit.WEEKS), LocalDate.now().plus(-2, ChronoUnit.DAYS)))
 
 
-    private var filter = Filter.LIMIT
+    private var sortFilter = SortFilter.LIMIT
 
     private var tagRecyclerView: RecyclerView? = null
     private var gifticonRecyclerView: RecyclerView? = null
@@ -71,10 +71,10 @@ class GifticonListActivity : AppCompatActivity() {
 
         filterDropdown.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onItemSelected(parent: AdapterView<*>, view: View?, position: Int, id: Long) {
-                filter = Filter.values()[position]
+                sortFilter = SortFilter.values()[position]
             }
             override fun onNothingSelected(parent: AdapterView<*>) {
-                filter = Filter.LIMIT
+                sortFilter = SortFilter.LIMIT
             }
         }
 
@@ -92,14 +92,16 @@ class GifticonListActivity : AppCompatActivity() {
         tagRecyclerView = findViewById(R.id.tagListView)
         val layoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
         tagRecyclerView?.layoutManager = layoutManager
-        tagRecyclerView?.adapter = TagAdapter(tagList, selectedTag)
+        tagRecyclerView?.adapter = TagAdapter(tagList, selectedTag) {
+            (gifticonRecyclerView?.adapter as? GifticonListAdapter)?.filter?.filter(null)
+        }
     }
 
     private fun setupGifticonRecycleView() {
         gifticonRecyclerView = findViewById(R.id.gifticonListView)
         val layoutManager = LinearLayoutManager(this)
         gifticonRecyclerView?.layoutManager = layoutManager
-        gifticonRecyclerView?.adapter = GifticonListAdapter(gifticonList, selectedTag)
+        gifticonRecyclerView?.adapter = GifticonListAdapter(gifticonList, selectedTag, sortFilter)
     }
 
     private fun updateRecycleTagData() {
