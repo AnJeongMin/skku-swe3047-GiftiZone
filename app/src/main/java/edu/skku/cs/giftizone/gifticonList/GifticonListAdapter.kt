@@ -16,6 +16,8 @@ import edu.skku.cs.giftizone.R
 import edu.skku.cs.giftizone.dataClass.Gifticon
 import java.time.LocalDate
 import java.time.Period
+import java.time.format.TextStyle
+import java.util.Locale
 
 class GifticonListAdapter(
     private val gifticonList: ArrayList<Gifticon>,
@@ -49,8 +51,9 @@ class GifticonListAdapter(
 //        holder.gifticonImage.setBackgroundResource(gifticon.imagePath)
         holder.gifticonProvider.text = gifticon.provider
         holder.gifticonContent.text = gifticon.content
-        holder.gifticonExpireDate.text = gifticon.expiredAt.toString()
 
+        val weekDay = gifticon.expiredAt.dayOfWeek.getDisplayName(TextStyle.SHORT, Locale.KOREAN)
+        holder.gifticonExpireDate.text = "${gifticon.expiredAt} (${weekDay})"
         val dDay = Period.between(LocalDate.now(), gifticon.expiredAt).days
         if (dDay < 0) {
             holder.itemView.setBackgroundColor(Color.GRAY)
