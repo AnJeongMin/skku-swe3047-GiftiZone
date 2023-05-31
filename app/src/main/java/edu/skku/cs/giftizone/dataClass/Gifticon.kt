@@ -1,12 +1,13 @@
 package edu.skku.cs.giftizone.dataClass
 
-import java.time.LocalDateTime
+import java.time.LocalDate
 
 data class Gifticon(
-    val photoPath: String,
+    val imagePath: String,
     val barcode: String,
     val tag: String,
-    val productProvider: String,
-    val productName: String,
-    val createAt: LocalDateTime = LocalDateTime.now(),
+    val provider: String,
+    val content: String,
+    val expiredAt: LocalDate,
+    val createAt: LocalDate = LocalDate.now(),
 )

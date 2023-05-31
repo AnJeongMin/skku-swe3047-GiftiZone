@@ -9,9 +9,9 @@
         android:id="@+id/gifticonImage"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginBottom="8dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="16dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -23,7 +23,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
         android:text="사용처"
         android:textSize="20sp"
         app:layout_constraintStart_toEndOf="@+id/gifticonImage"
@@ -35,6 +34,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:text="기프티콘 내용"
+        android:textColor="@color/black"
         android:textSize="16sp"
         app:layout_constraintStart_toStartOf="@+id/providerText"
         app:layout_constraintTop_toBottomOf="@+id/providerText" />
@@ -54,7 +54,7 @@
         android:id="@+id/expireDateText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
+        android:layout_marginEnd="16dp"
         android:text="만료 시간"
         app:layout_constraintBottom_toBottomOf="@+id/gifticonImage"
         app:layout_constraintEnd_toEndOf="parent" />
@@ -76,4 +76,5 @@
         app:layout_constraintEnd_toEndOf="@+id/expireDateText"
         app:layout_constraintTop_toTopOf="@+id/gifticonImage"
         app:srcCompat="@drawable/baseline_delete_forever_24" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

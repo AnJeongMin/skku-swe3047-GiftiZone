@@ -97,6 +97,8 @@ class GifticonListActivity : AppCompatActivity() {
 
     private fun setupGifticonRecycleView() {
         gifticonRecyclerView = findViewById(R.id.gifticonListView)
+        val layoutManager = LinearLayoutManager(this)
+        gifticonRecyclerView?.layoutManager = layoutManager
         gifticonRecyclerView?.adapter = GifticonListAdapter(gifticonList, selectedTag)
     }
 
