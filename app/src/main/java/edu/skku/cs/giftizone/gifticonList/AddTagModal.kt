@@ -9,12 +9,12 @@ import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import edu.skku.cs.giftizone.R
 
-class TagModal(
+class AddTagModal(
     private val context: Context,
     private val addTagHandler: (String) -> Unit
 ) {
     private val inflater = LayoutInflater.from(context)
-    private val dialogLayout = inflater.inflate(R.layout.tag_dialog_layout, null)
+    private val dialogLayout = inflater.inflate(R.layout.tag_add_modal, null)
     private val confirmTagBtn = dialogLayout.findViewById<Button>(R.id.confirmTagButton)
     private val cancelTagBtn = dialogLayout.findViewById<ImageButton>(R.id.cancelTagButton)
     private val editTextTag = dialogLayout.findViewById<EditText>(R.id.editTextTag)
