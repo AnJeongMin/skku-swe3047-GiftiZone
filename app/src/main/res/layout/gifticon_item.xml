@@ -64,7 +64,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
-        android:text="D-15"
+        android:text="Dday"
+        android:padding="6dp"
+        android:textColor="@color/white"
+        android:background="@drawable/round_button"
         app:layout_constraintBottom_toTopOf="@+id/expireDateText"
         app:layout_constraintEnd_toEndOf="@+id/expireDateText" />
 
