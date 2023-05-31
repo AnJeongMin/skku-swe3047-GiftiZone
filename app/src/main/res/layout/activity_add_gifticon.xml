@@ -118,23 +118,24 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:layout_constraintBottom_toBottomOf="@+id/tagSelect"
-        app:layout_constraintStart_toStartOf="@+id/expireText"
+        app:layout_constraintStart_toStartOf="@+id/addExpireText"
         app:layout_constraintTop_toTopOf="@+id/tagSelect" />
 
     <TextView
-        android:id="@+id/expireText"
+        android:id="@+id/addExpireText"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginEnd="16dp"
+        android:text="기한 선택"
         android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="@+id/expireEdit"
-        app:layout_constraintEnd_toStartOf="@+id/imageView2"
+        app:layout_constraintEnd_toStartOf="@+id/calenderButton"
         app:layout_constraintStart_toEndOf="@+id/expireEdit"
         app:layout_constraintTop_toTopOf="@+id/expireEdit" />
 
     <ImageView
-        android:id="@+id/imageView2"
+        android:id="@+id/calenderButton"
         android:layout_width="30dp"
         android:layout_height="30dp"
         android:layout_marginEnd="32dp"
