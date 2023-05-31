@@ -11,6 +11,7 @@ import edu.skku.cs.giftizone.R
 
 class AddTagModal(
     private val context: Context,
+    private val tagList: ArrayList<String>,
     private val addTagHandler: (String) -> Unit
 ) {
     private val inflater = LayoutInflater.from(context)
@@ -25,10 +26,11 @@ class AddTagModal(
         tagDialog.setView(dialogLayout)
         confirmTagBtn.setOnClickListener {
             val tag = editTextTag.text.toString()
-            if (tag.isEmpty()) {
-                Toast.makeText(context, "태그를 입력해주세요.", Toast.LENGTH_SHORT).show()
+
+            if (!isValidTag(tag)) {
                 return@setOnClickListener
             }
+
             addTagHandler(tag)
             tagDialog.dismiss()
         }
@@ -39,5 +41,25 @@ class AddTagModal(
 
     fun show() {
         tagDialog.show()
+    }
+
+    private fun isValidTag(tag: String): Boolean {
+        if (tag.isEmpty()) {
+            Toast.makeText(context, "태그를 입력해주세요.", Toast.LENGTH_SHORT).show()
+            return false
+        }
+        if (tagList.contains(tag)) {
+            Toast.makeText(context, "이미 존재하는 태그입니다.", Toast.LENGTH_SHORT).show()
+            return false
+        }
+        if (tag.length > 6) {
+            Toast.makeText(context, "태그는 6자 이내로 입력해주세요.", Toast.LENGTH_SHORT).show()
+            return false
+        }
+        if (tagList.size >= 10) {
+            Toast.makeText(context, "태그는 5개까지만 추가할 수 있습니다.", Toast.LENGTH_SHORT).show()
+            return false
+        }
+        return true
     }
 }

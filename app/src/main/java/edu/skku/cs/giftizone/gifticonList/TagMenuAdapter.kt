@@ -14,7 +14,6 @@ import edu.skku.cs.giftizone.R
 class TagMenuAdapter(
     private val tagList: ArrayList<String>,
     private val removeTagHandler: (String) -> Unit,
-    private val context: Context
 ) :
     RecyclerView.Adapter<TagMenuAdapter.TagMenuHolder>() {
 

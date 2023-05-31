@@ -27,7 +27,7 @@ class TagMenuModal(
 
     private fun setupTagMenuRecycleView() {
         val tagRecycleView = dialogLayout.findViewById<androidx.recyclerview.widget.RecyclerView>(R.id.tagMenuList)
-        tagRecycleView.adapter = TagMenuAdapter(tagList, removeTagHandler, context)
+        tagRecycleView.adapter = TagMenuAdapter(tagList, removeTagHandler)
         tagRecycleView.layoutManager = androidx.recyclerview.widget.LinearLayoutManager(context)
     }
 
