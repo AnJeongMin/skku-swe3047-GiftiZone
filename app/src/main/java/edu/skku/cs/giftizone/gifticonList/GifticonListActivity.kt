@@ -2,6 +2,7 @@ package edu.skku.cs.giftizone.gifticonList
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
@@ -21,9 +22,9 @@ class GifticonListActivity : AppCompatActivity() {
     private val selectedTag = HashSet<String>()
 
     private val tagList = arrayListOf("tag1", "tag2", "tag3")
-    private val gifticonList = arrayListOf(Gifticon("", "123-123", "tag1", "BBQ", "황올1", LocalDate.now().plus(1, ChronoUnit.WEEKS)),
+    private val gifticonList = arrayListOf(Gifticon("", "123-123", "tag1", "ABQ", "황올1", LocalDate.now().plus(1, ChronoUnit.WEEKS)),
     Gifticon("", "123-123", "tag2", "BBQ", "황올2", LocalDate.now().plus(-3, ChronoUnit.WEEKS), LocalDate.now().plus(-3, ChronoUnit.DAYS)),
-    Gifticon("", "123-123", "tag3", "BBQ", "황올3", LocalDate.now().plus(1, ChronoUnit.WEEKS), LocalDate.now().plus(-2, ChronoUnit.DAYS)))
+    Gifticon("", "123-123", "tag3", "CBQ", "황올3", LocalDate.now().plus(1, ChronoUnit.WEEKS), LocalDate.now().plus(-4, ChronoUnit.DAYS)))
 
 
     private var sortFilter = SortFilter.LIMIT
@@ -48,7 +49,7 @@ class GifticonListActivity : AppCompatActivity() {
         tagAddBtn.setOnClickListener {
             val addTagModal = AddTagModal(this, tagList) { tag ->
                 tagList.add(tag)
-                updateRecycleTagData()
+                updateRecycleData()
             }
             addTagModal.show()
         }
@@ -60,7 +61,7 @@ class GifticonListActivity : AppCompatActivity() {
             val tagMenuModal = TagMenuModal(this, tagList) {
                 tagList.remove(it)
                 selectedTag.remove(it)
-                updateRecycleTagData()
+                updateRecycleData()
             }
             tagMenuModal.show()
         }
@@ -72,9 +73,12 @@ class GifticonListActivity : AppCompatActivity() {
         filterDropdown.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onItemSelected(parent: AdapterView<*>, view: View?, position: Int, id: Long) {
                 sortFilter = SortFilter.values()[position]
+                gifticonFiltering()
+
             }
             override fun onNothingSelected(parent: AdapterView<*>) {
                 sortFilter = SortFilter.LIMIT
+                gifticonFiltering()
             }
         }
 
@@ -93,7 +97,7 @@ class GifticonListActivity : AppCompatActivity() {
         val layoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
         tagRecyclerView?.layoutManager = layoutManager
         tagRecyclerView?.adapter = TagAdapter(tagList, selectedTag) {
-            (gifticonRecyclerView?.adapter as? GifticonListAdapter)?.filter?.filter(null)
+            gifticonFiltering()
         }
     }
 
@@ -104,7 +108,14 @@ class GifticonListActivity : AppCompatActivity() {
         gifticonRecyclerView?.adapter = GifticonListAdapter(gifticonList, selectedTag, sortFilter)
     }
 
-    private fun updateRecycleTagData() {
+    private fun updateRecycleData() {
         tagRecyclerView?.adapter?.notifyDataSetChanged()
+        gifticonRecyclerView?.adapter?.notifyDataSetChanged()
+    }
+
+    private fun gifticonFiltering() {
+        val adapter = gifticonRecyclerView?.adapter as? GifticonListAdapter
+        adapter?.setSortFilter(sortFilter)
+        adapter?.filter?.filter(null)
     }
 }

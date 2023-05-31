@@ -24,7 +24,7 @@ import java.util.Locale
 class GifticonListAdapter(
     private val fullGifticonList: ArrayList<Gifticon>,
     private val selectedTag: HashSet<String>,
-    private val filter: SortFilter
+    private var sortFilter: SortFilter,
     ) :
     RecyclerView.Adapter<GifticonListAdapter.GifticonViewHolder>(), Filterable {
 
@@ -88,6 +88,18 @@ class GifticonListAdapter(
                     }
                 }
 
+                when (sortFilter) {
+                    SortFilter.LIMIT -> {
+                        filteredList.sortBy { it.expiredAt }
+                    }
+                    SortFilter.SAVE -> {
+                        filteredList.sortBy { it.createAt }
+                    }
+                    SortFilter.ALPHA -> {
+                        filteredList.sortBy { it.provider }
+                    }
+                }
+
                 val results = FilterResults()
                 results.values = filteredList
 
@@ -100,5 +112,9 @@ class GifticonListAdapter(
                 notifyDataSetChanged()
             }
         }
+    }
+
+    fun setSortFilter(sortFilter: SortFilter) {
+        this.sortFilter = sortFilter
     }
 }
