@@ -1,15 +1,14 @@
 package edu.skku.cs.giftizone.gifticonList
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
-import android.widget.AdapterView
-import android.widget.ArrayAdapter
-import android.widget.ImageButton
-import android.widget.Spinner
+import android.widget.*
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import edu.skku.cs.giftizone.R
+import edu.skku.cs.giftizone.addGifticon.AddGifticonActivity
 import edu.skku.cs.giftizone.dataClass.Gifticon
 import edu.skku.cs.giftizone.enums.SortFilter
 import java.time.LocalDate
@@ -32,6 +31,8 @@ class GifticonListActivity : AppCompatActivity() {
     private var gifticonRecyclerView: RecyclerView? = null
     private val recyclerViewList: ArrayList<RecyclerView> = ArrayList()
 
+    private val REQUEST_SELECT_IMAGE = 1
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_gifticon_list)
@@ -42,6 +43,8 @@ class GifticonListActivity : AppCompatActivity() {
 
         setupTagRecycleView()
         setupGifticonRecycleView()
+
+        setupAddGifticonActivity()
     }
 
     private fun setupAddTagModal() {
@@ -123,5 +126,13 @@ class GifticonListActivity : AppCompatActivity() {
         val adapter = gifticonRecyclerView?.adapter as? GifticonListAdapter
         adapter?.setSortFilter(sortFilter)
         adapter?.filter?.filter(null)
+    }
+
+    private fun setupAddGifticonActivity() {
+        val addGifticonBtn = findViewById<ImageView>(R.id.addGifticonButton)
+        addGifticonBtn.setOnClickListener {
+            val intent = Intent(this, AddGifticonActivity::class.java)
+            startActivity(intent)
+        }
     }
 }
