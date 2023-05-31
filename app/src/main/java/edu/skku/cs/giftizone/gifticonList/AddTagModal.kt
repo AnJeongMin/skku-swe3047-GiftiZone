@@ -14,6 +14,9 @@ class AddTagModal(
     private val tagList: ArrayList<String>,
     private val addTagHandler: (String) -> Unit
 ) {
+    private val MAX_TAG_COUNT = 10
+    private val MAX_TAG_LENGTH = 5
+
     private val inflater = LayoutInflater.from(context)
     private val dialogLayout = inflater.inflate(R.layout.tag_add_modal, null)
     private val confirmTagBtn = dialogLayout.findViewById<Button>(R.id.confirmTagButton)
@@ -52,12 +55,12 @@ class AddTagModal(
             Toast.makeText(context, "이미 존재하는 태그입니다.", Toast.LENGTH_SHORT).show()
             return false
         }
-        if (tag.length > 6) {
-            Toast.makeText(context, "태그는 6자 이내로 입력해주세요.", Toast.LENGTH_SHORT).show()
+        if (tag.length > MAX_TAG_LENGTH) {
+            Toast.makeText(context, "태그는 ${MAX_TAG_LENGTH}자 이내로 입력해주세요.", Toast.LENGTH_SHORT).show()
             return false
         }
-        if (tagList.size >= 10) {
-            Toast.makeText(context, "태그는 5개까지만 추가할 수 있습니다.", Toast.LENGTH_SHORT).show()
+        if (tagList.size >= MAX_TAG_COUNT) {
+            Toast.makeText(context, "태그는 ${MAX_TAG_COUNT}개 까지만 추가할 수 있습니다.", Toast.LENGTH_SHORT).show()
             return false
         }
         return true
