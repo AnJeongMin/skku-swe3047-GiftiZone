@@ -16,6 +16,9 @@ class GifticonListActivity : AppCompatActivity() {
 //    private val tagList = ArrayList<String>()
     private val tagList = arrayListOf("tag1", "tagtag2")
     private val selectedTag = HashSet<String>()
+
+
+
     private var filter = Filter.LIMIT
 
     override fun onCreate(savedInstanceState: Bundle?) {
