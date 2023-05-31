@@ -57,7 +57,8 @@ class GifticonListAdapter(
         val dDay = Period.between(LocalDate.now(), gifticon.expiredAt).days
         if (dDay < 0) {
             holder.itemView.setBackgroundColor(Color.GRAY)
-            holder.itemView.findViewById<TextView>(R.id.expiredText).visibility = View.VISIBLE
+            holder.itemView.alpha = 0.5f
+            holder.gifticonDday.visibility = View.GONE
         } else {
             holder.gifticonDday.text = "D-${dDay}"
         }

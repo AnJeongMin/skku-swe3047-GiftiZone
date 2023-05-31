@@ -22,7 +22,7 @@ class GifticonListActivity : AppCompatActivity() {
 
     private val tagList = arrayListOf("tag1", "tag2", "tag3")
     private val gifticonList = arrayListOf(Gifticon("", "123-123", "tag1", "BBQ", "황올1", LocalDate.now().plus(1, ChronoUnit.WEEKS)),
-    Gifticon("", "123-123", "tag2", "BBQ", "황올2", LocalDate.now().plus(1, ChronoUnit.WEEKS)),
+    Gifticon("", "123-123", "tag2", "BBQ", "황올2", LocalDate.now().plus(-1, ChronoUnit.WEEKS)),
     Gifticon("", "123-123", "tag3", "BBQ", "황올3", LocalDate.now().plus(1, ChronoUnit.WEEKS)))
 
 
