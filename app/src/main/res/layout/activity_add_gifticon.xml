@@ -114,7 +114,7 @@
         app:layout_constraintTop_toBottomOf="@+id/textView7" />
 
     <Spinner
-        android:id="@+id/spinner"
+        android:id="@+id/addTagDropdown"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:layout_constraintBottom_toBottomOf="@+id/tagSelect"

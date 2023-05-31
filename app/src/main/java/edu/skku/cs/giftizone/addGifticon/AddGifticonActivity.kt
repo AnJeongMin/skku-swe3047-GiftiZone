@@ -6,15 +6,17 @@ import android.net.Uri
 import android.os.Bundle
 import android.provider.MediaStore
 import android.util.Log
-import android.widget.ImageView
-import android.widget.TextView
+import android.view.View
+import android.widget.*
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import com.bumptech.glide.Glide
 import edu.skku.cs.giftizone.R
+import edu.skku.cs.giftizone.enums.SortFilter
 import java.util.*
 
 class AddGifticonActivity : AppCompatActivity() {
+    private val tagList: ArrayList<String>? = intent.getStringArrayListExtra("tagList")
     private val pickImageResultLauncher = registerForActivityResult(ActivityResultContracts.GetContent()) { uri: Uri? ->
         val gifticonImage = findViewById<ImageView>(R.id.addGifticonImage)
         if (uri != null) {
@@ -52,4 +54,6 @@ class AddGifticonActivity : AppCompatActivity() {
             datePickerDialog.show()
         }
     }
+
+
 }

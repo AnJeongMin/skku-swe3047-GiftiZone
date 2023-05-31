@@ -132,6 +132,8 @@ class GifticonListActivity : AppCompatActivity() {
         val addGifticonBtn = findViewById<ImageView>(R.id.addGifticonButton)
         addGifticonBtn.setOnClickListener {
             val intent = Intent(this, AddGifticonActivity::class.java)
+
+            intent.putExtra("tagList", tagList)
             startActivity(intent)
         }
     }
