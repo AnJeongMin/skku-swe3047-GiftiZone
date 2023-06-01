@@ -12,6 +12,7 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import com.bumptech.glide.Glide
 import edu.skku.cs.giftizone.R
+import edu.skku.cs.giftizone.dataClass.Gifticon
 import edu.skku.cs.giftizone.enums.SortFilter
 import java.time.LocalDate
 import java.util.*
