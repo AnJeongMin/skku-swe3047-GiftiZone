@@ -111,7 +111,9 @@ class GifticonListActivity : AppCompatActivity() {
         gifticonRecyclerView = findViewById(R.id.gifticonListView)
         val layoutManager = LinearLayoutManager(this)
         gifticonRecyclerView?.layoutManager = layoutManager
-        gifticonRecyclerView?.adapter = GifticonListAdapter(this, gifticonList, selectedTag, sortFilter)
+        gifticonRecyclerView?.adapter = GifticonListAdapter(this, gifticonList, selectedTag, sortFilter) {
+            gifticonInfoActivityHandler(it)
+        }
 
         recyclerViewList.add(gifticonRecyclerView!!)
     }
@@ -156,10 +158,6 @@ class GifticonListActivity : AppCompatActivity() {
     }
 
     private fun gifticonInfoActivityHandler(gifticon: Gifticon) {
-        val dDay = Period.between(LocalDate.now(), gifticon.expiredAt).days
-        if (dDay < 0)
-            return
-
         val intent = Intent(this, GifticonInfoActivity::class.java)
         intent.putExtra("gifticon", gifticon)
         startActivity(intent)

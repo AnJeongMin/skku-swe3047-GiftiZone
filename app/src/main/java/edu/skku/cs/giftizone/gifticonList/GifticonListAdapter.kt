@@ -11,6 +11,7 @@ import android.widget.Filterable
 import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.TextView
+import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import edu.skku.cs.giftizone.R
@@ -27,6 +28,7 @@ class GifticonListAdapter(
     private val originGifticonList: ArrayList<Gifticon>,
     private val selectedTag: HashSet<String>,
     private var sortFilter: SortFilter,
+    private val gifticonInfoHandler: (gifticon: Gifticon) -> Unit,
     ) :
     RecyclerView.Adapter<GifticonListAdapter.GifticonViewHolder>(), Filterable {
 
@@ -41,6 +43,15 @@ class GifticonListAdapter(
         val gifticonRemoveBtn = gifticonItemView.findViewById<ImageButton>(R.id.gifticonRemoveButton)
 
         init {
+            gifticonItemView.setOnClickListener {
+                val selectedGifticon = filteredGifticonList[adapterPosition]
+                val dDay = Period.between(LocalDate.now(), selectedGifticon.expiredAt).days
+                if (dDay < 0) {
+                    Toast.makeText(context, "기간이 만료된 기프티콘입니다.", Toast.LENGTH_SHORT).show()
+                    return@setOnClickListener
+                }
+                gifticonInfoHandler(selectedGifticon)
+            }
             gifticonRemoveBtn.setOnClickListener {
                 val selectedGifticon = filteredGifticonList[adapterPosition]
                 val gifticonRemoveModal = GifticonRemoveModal(context, selectedGifticon) {
