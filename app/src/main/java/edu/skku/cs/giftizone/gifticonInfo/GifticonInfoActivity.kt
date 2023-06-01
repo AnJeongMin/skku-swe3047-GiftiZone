@@ -17,6 +17,7 @@ class GifticonInfoActivity : AppCompatActivity() {
 
         setupGifticonInfoImage()
         setupGifticonMapButton()
+        setupGifticonShareButton()
     }
 
     private fun setupGifticonInfoImage() {
@@ -32,6 +33,14 @@ class GifticonInfoActivity : AppCompatActivity() {
             val intent = Intent(this, GifticonMapActivity::class.java)
             intent.putExtra("provider", gifticon?.provider)
             startActivity(intent)
+        }
+    }
+
+    private fun setupGifticonShareButton() {
+        val gifticonShareButton = findViewById<ImageView>(R.id.gifticonInfoShareButton)
+        gifticonShareButton.setOnClickListener {
+            val gifticonShareModal = GifticonShareModal(this, gifticon!!)
+            gifticonShareModal.show()
         }
     }
 }
