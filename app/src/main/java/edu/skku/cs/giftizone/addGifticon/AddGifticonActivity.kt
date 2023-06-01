@@ -2,8 +2,11 @@ package edu.skku.cs.giftizone.addGifticon
 
 import android.app.DatePickerDialog
 import android.content.Intent
+import android.graphics.Bitmap
+import android.graphics.BitmapFactory
 import android.net.Uri
 import android.os.Bundle
+import android.os.Environment
 import android.provider.MediaStore
 import android.util.Log
 import android.view.View
@@ -14,11 +17,15 @@ import com.bumptech.glide.Glide
 import edu.skku.cs.giftizone.R
 import edu.skku.cs.giftizone.dataClass.Gifticon
 import edu.skku.cs.giftizone.enums.SortFilter
+import java.io.File
+import java.io.FileOutputStream
+import java.io.IOException
 import java.time.LocalDate
 import java.util.*
 
 class AddGifticonActivity : AppCompatActivity() {
     private var tagList: ArrayList<String>? = null
+    private var localImageUrl: Uri? = null
     private var selectedTag: String? = null
     private var expiredDate: LocalDate? = null
     private val pickImageResultLauncher = registerForActivityResult(ActivityResultContracts.GetContent()) { uri: Uri? ->
@@ -27,6 +34,7 @@ class AddGifticonActivity : AppCompatActivity() {
             Glide.with(this)
                 .load(uri)  // or Uri or File
                 .into(gifticonImage)
+            localImageUrl = uri
         }
     }
 
@@ -81,6 +89,37 @@ class AddGifticonActivity : AppCompatActivity() {
             adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
             addTagDropdown.adapter = adapter
         }
+    }
+
+    private fun uri2bitmap(uri: Uri): Bitmap? {
+        return try {
+            val pfd = contentResolver.openFileDescriptor(uri, "r")
+            val fd = pfd?.fileDescriptor
+            val image = BitmapFactory.decodeFileDescriptor(fd)
+            pfd?.close()
+            return image
+        } catch (e: IOException) {
+            e.printStackTrace()
+            return null
+        }
+    }
+
+    private fun saveBitmapImage(bitmap: Bitmap): String? {
+        val filename = "${System.currentTimeMillis()}.jpg"
+        val dir = getExternalFilesDir(Environment.DIRECTORY_PICTURES)
+        val file = File(dir, filename)
+
+        try {
+            val out = FileOutputStream(file)
+            bitmap.compress(Bitmap.CompressFormat.JPEG, 100, out)
+            out.flush()
+            out.close()
+        } catch (e: Exception) {
+            e.printStackTrace()
+            return null
+        }
+
+        return file.absolutePath
     }
 
     private fun isValidGifticon(): Boolean {
