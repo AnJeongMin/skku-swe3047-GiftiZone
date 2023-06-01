@@ -21,11 +21,12 @@
         android:id="@+id/expireEdit"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
         android:layout_marginTop="32dp"
         android:text="유효기간"
         android:textColor="@color/black"
         android:textSize="20sp"
-        app:layout_constraintStart_toEndOf="@+id/textView7"
+        app:layout_constraintStart_toStartOf="@+id/contentEdit"
         app:layout_constraintTop_toBottomOf="@+id/contentEdit" />
 
     <EditText
@@ -128,11 +129,14 @@
         android:layout_marginStart="16dp"
         android:layout_marginEnd="16dp"
         android:text="기한 선택"
+        android:textAlignment="center"
         android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="@+id/expireEdit"
         app:layout_constraintEnd_toStartOf="@+id/calenderButton"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toEndOf="@+id/expireEdit"
-        app:layout_constraintTop_toTopOf="@+id/expireEdit" />
+        app:layout_constraintTop_toTopOf="@+id/expireEdit"
+        app:layout_constraintVertical_bias="1.0" />
 
     <ImageView
         android:id="@+id/calenderButton"

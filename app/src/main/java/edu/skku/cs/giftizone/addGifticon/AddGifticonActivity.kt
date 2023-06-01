@@ -16,7 +16,7 @@ import edu.skku.cs.giftizone.enums.SortFilter
 import java.util.*
 
 class AddGifticonActivity : AppCompatActivity() {
-    private val tagList: ArrayList<String>? = intent.getStringArrayListExtra("tagList")
+//    private val tagList: ArrayList<String>? = intent.getStringArrayListExtra("tagList")
     private val pickImageResultLauncher = registerForActivityResult(ActivityResultContracts.GetContent()) { uri: Uri? ->
         val gifticonImage = findViewById<ImageView>(R.id.addGifticonImage)
         if (uri != null) {
