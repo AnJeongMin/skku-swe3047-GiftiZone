@@ -34,8 +34,6 @@ class GifticonListActivity : AppCompatActivity() {
     private var gifticonRecyclerView: RecyclerView? = null
     private val recyclerViewList: ArrayList<RecyclerView> = ArrayList()
 
-    private val REQUEST_SELECT_IMAGE = 1
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_gifticon_list)
@@ -146,6 +144,10 @@ class GifticonListActivity : AppCompatActivity() {
 
         val addGifticonBtn = findViewById<ImageView>(R.id.addGifticonButton)
         addGifticonBtn.setOnClickListener {
+            if (tagList.isEmpty()) {
+                Toast.makeText(this, "태그를 먼저 추가해주세요.", Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
+            }
             val intent = Intent(this, AddGifticonActivity::class.java)
 
             intent.putStringArrayListExtra("tagList", tagList)
