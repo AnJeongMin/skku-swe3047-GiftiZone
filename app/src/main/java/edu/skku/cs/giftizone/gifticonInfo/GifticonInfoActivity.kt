@@ -3,6 +3,7 @@ package edu.skku.cs.giftizone.gifticonInfo
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.widget.ImageView
 import android.widget.Toast
 import com.bumptech.glide.Glide
@@ -84,17 +85,10 @@ class GifticonInfoActivity : AppCompatActivity() {
 
     private fun requestGifticonShare(gifticon: Gifticon, shareId: String) {
         val client = OkHttpClient()
-        val url = "http://localhost:4000/share/gifticon"
+        val url = "http://172.26.10.73:4000/share/gifticon"
 
-        val jsonObject = JsonObject()
-        val imagePath = gifticon.imagePath
-        jsonObject.add("gifticon", Gson().toJsonTree(gifticon))
-        jsonObject.addProperty("image", encodeImageToBase64(imagePath))
-        jsonObject.addProperty("shareId", shareId)
-        val requestBody = jsonObject.toString().toRequestBody("application/json; charset=utf-8".toMediaType())
-
-        print("===========================================")
-        print(jsonObject.toString())
+        val jsonString = gifticon2json(gifticon, shareId)
+        val requestBody = jsonString.toRequestBody("application/json; charset=utf-8".toMediaType())
         val request = Request.Builder()
             .url(url)
             .post(requestBody)
@@ -116,6 +110,20 @@ class GifticonInfoActivity : AppCompatActivity() {
         val randomNumber = random.nextInt(1000000)
 
         return String.format("%06d", randomNumber)
+    }
+
+    private fun gifticon2json(gifticon: Gifticon, shareId: String): String {
+        val jsonObject = JsonObject()
+        val imagePath = gifticon.imagePath
+
+        val gifticonJson = Gson().toJsonTree(gifticon).asJsonObject
+        gifticonJson.addProperty("createAt", gifticon.createAt.toString())
+        gifticonJson.addProperty("expiredAt", gifticon.expiredAt.toString())
+
+        jsonObject.add("gifticon", gifticonJson)
+        jsonObject.addProperty("image", encodeImageToBase64(imagePath))
+        jsonObject.addProperty("shareId", shareId)
+        return jsonObject.toString()
     }
 
     private fun encodeImageToBase64(imagePath: String): String {
