@@ -63,8 +63,8 @@ class AddGifticonActivity : AppCompatActivity() {
 
             val datePickerDialog = DatePickerDialog(this, { _, selectedYear, selectedMonth, selectedDay ->
                 expireDateText.text = "$selectedYear/${selectedMonth+1}/$selectedDay"
+                expiredDate = LocalDate.of(selectedYear, selectedMonth+1, selectedDay)
             }, year, month, day)
-            expiredDate = LocalDate.of(year, month+1, day)
 
             datePickerDialog.show()
         }
