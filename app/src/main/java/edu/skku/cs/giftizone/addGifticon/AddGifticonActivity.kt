@@ -41,11 +41,11 @@ class AddGifticonActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_add_gifticon)
-        tagList = intent.getStringArrayListExtra("tagList")
 
         pickImageFromGallery()
         setupSelectExpireDate()
         setupTagSelectDropdown()
+        setupSaveGifticonBtn()
     }
 
     private fun pickImageFromGallery() {
@@ -71,6 +71,7 @@ class AddGifticonActivity : AppCompatActivity() {
     }
 
     private fun setupTagSelectDropdown() {
+        tagList = intent.getStringArrayListExtra("tagList")
         val addTagDropdown: Spinner = findViewById(R.id.addTagDropdown)
 
         addTagDropdown.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
@@ -91,6 +92,24 @@ class AddGifticonActivity : AppCompatActivity() {
         }
     }
 
+    private fun setupSaveGifticonBtn() {
+        val saveGifticonBtn = findViewById<Button>(R.id.addGifticonConfirmButton)
+        saveGifticonBtn.setOnClickListener {
+            if (!isValidGifticon())
+                return@setOnClickListener
+
+            val barcode = findViewById<EditText>(R.id.barcodeEdit).text.toString()
+            val gifticonProvider = findViewById<EditText>(R.id.providerEdit).text.toString()
+            val gifticonContent = findViewById<EditText>(R.id.contentEdit).text.toString()
+            val imagePath = saveBitmapImage(uri2bitmap(localImageUrl!!)!!)!!
+            val gifticon = Gifticon(imagePath, barcode, selectedTag!!, gifticonProvider, gifticonContent, expiredDate!!)
+            val intent = Intent()
+            intent.putExtra("gifticon", gifticon)
+            setResult(RESULT_OK, intent)
+            finish()
+        }
+    }
+
     private fun uri2bitmap(uri: Uri): Bitmap? {
         return try {
             val pfd = contentResolver.openFileDescriptor(uri, "r")
@@ -100,6 +119,7 @@ class AddGifticonActivity : AppCompatActivity() {
             return image
         } catch (e: IOException) {
             e.printStackTrace()
+            toast("이미지를 불러오는데 실패했습니다.")
             return null
         }
     }
@@ -116,6 +136,7 @@ class AddGifticonActivity : AppCompatActivity() {
             out.close()
         } catch (e: Exception) {
             e.printStackTrace()
+            toast("이미지를 저장하는데 실패했습니다.")
             return null
         }
 
