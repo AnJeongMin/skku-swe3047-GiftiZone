@@ -70,12 +70,12 @@ class GifticonListAdapter(
         val dDay = Period.between(LocalDate.now(), gifticon.expiredAt).days
         holder.gifticonDday.text = "D-${dDay}"
         if (dDay < 0) {
-            holder.itemView.setBackgroundColor(Color.GRAY)
-            holder.itemView.alpha = 0.5f
+            val blindText = holder.itemView.findViewById<TextView>(R.id.blindText)
+            blindText.visibility = View.VISIBLE
             holder.gifticonDday.visibility = View.GONE
         } else {
-            holder.itemView.setBackgroundColor(Color.WHITE)
-            holder.itemView.alpha = 1f
+            val blindText = holder.itemView.findViewById<TextView>(R.id.blindText)
+            blindText.visibility = View.INVISIBLE
             holder.gifticonDday.visibility = View.VISIBLE
         }
     }
