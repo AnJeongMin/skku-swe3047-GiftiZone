@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
+import com.bumptech.glide.Glide
 import edu.skku.cs.giftizone.R
 import edu.skku.cs.giftizone.dataClass.Gifticon
 
@@ -24,7 +25,9 @@ class GifticonRemoveModal(
 
     init {
         removeGifticonDialog.setView(dialogLayout)
-//        removeGifticonImage.setImageBitmap(gifticon.image)
+        Glide.with(context)
+            .load(gifticon.imagePath)
+            .into(removeGifticonImage)
         removeGifticonProvider.text = gifticon.provider
         removeGifticonContent.text = gifticon.content
 
