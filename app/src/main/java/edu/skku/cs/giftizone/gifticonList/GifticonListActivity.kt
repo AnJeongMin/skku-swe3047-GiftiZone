@@ -10,6 +10,7 @@ import androidx.activity.result.ActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import edu.skku.cs.giftizone.GifticonInfoActivity
 import edu.skku.cs.giftizone.R
 import edu.skku.cs.giftizone.addGifticon.AddGifticonActivity
 import edu.skku.cs.giftizone.dataClass.Gifticon
@@ -152,6 +153,16 @@ class GifticonListActivity : AppCompatActivity() {
             intent.putStringArrayListExtra("tagList", tagList)
             startForResult.launch(intent)
         }
+    }
+
+    private fun gifticonInfoActivityHandler(gifticon: Gifticon) {
+        val dDay = Period.between(LocalDate.now(), gifticon.expiredAt).days
+        if (dDay < 0)
+            return
+
+        val intent = Intent(this, GifticonInfoActivity::class.java)
+        intent.putExtra("gifticon", gifticon)
+        startActivity(intent)
     }
 
     private fun toast(message: String) = Toast.makeText(this, message, Toast.LENGTH_SHORT).show()

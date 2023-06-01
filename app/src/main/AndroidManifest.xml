@@ -12,6 +12,9 @@
         android:theme="@style/Theme.GiftiZone"
         tools:targetApi="31">
         <activity
+            android:name=".GifticonInfoActivity"
+            android:exported="false" />
+        <activity
             android:name=".selectImage.SelectImageActivity"
             android:exported="false" />
         <activity
