@@ -42,7 +42,7 @@ class AddGifticonActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_add_gifticon)
 
-        pickImageFromGallery()
+        setupSelectImageBtn()
         setupSelectExpireDate()
         setupTagSelectDropdown()
         setupSaveGifticonBtn()
@@ -50,6 +50,14 @@ class AddGifticonActivity : AppCompatActivity() {
 
     private fun pickImageFromGallery() {
         pickImageResultLauncher.launch("image/*")
+    }
+
+    private fun setupSelectImageBtn() {
+        val gifticonImage = findViewById<ImageView>(R.id.addGifticonImage)
+        gifticonImage.setImageResource(R.drawable.baseline_image_search_24)
+        gifticonImage.setOnClickListener {
+            pickImageFromGallery()
+        }
     }
 
     private fun setupSelectExpireDate() {
@@ -144,6 +152,11 @@ class AddGifticonActivity : AppCompatActivity() {
     }
 
     private fun isValidGifticon(): Boolean {
+        if (localImageUrl == null) {
+            toast("이미지를 선택해주세요.")
+            return false
+        }
+
         val barcode = findViewById<EditText>(R.id.barcodeEdit).text.toString()
         if (barcode.isEmpty()) {
             toast("바코드를 입력해주세요.")
