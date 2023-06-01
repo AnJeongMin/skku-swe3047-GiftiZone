@@ -40,6 +40,7 @@ class GifticonListActivity : AppCompatActivity() {
         setupAddTagModal()
         setupTagMenuModal()
         setupDropdown()
+        setupInputGifticonModal()
 
         setupTagRecycleView()
         setupGifticonRecycleView()
@@ -153,6 +154,18 @@ class GifticonListActivity : AppCompatActivity() {
 
             intent.putStringArrayListExtra("tagList", tagList)
             startForResult.launch(intent)
+        }
+    }
+
+    private fun setupInputGifticonModal() {
+        val inputGifticonBtn = findViewById<ImageView>(R.id.getGifticonButton)
+        inputGifticonBtn.setOnClickListener {
+            val inputGifticonModal = InputGifticonModal(this) { gifticon ->
+                gifticonList.add(gifticon)
+                updateRecycleData()
+                updateGifticonFilter()
+            }
+            inputGifticonModal.show()
         }
     }
 

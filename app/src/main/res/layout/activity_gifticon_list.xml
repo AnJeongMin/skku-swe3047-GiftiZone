@@ -77,8 +77,8 @@
 
     <ImageView
         android:id="@+id/addGifticonButton"
-        android:layout_width="60dp"
-        android:layout_height="60dp"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
         android:layout_marginEnd="32dp"
         android:layout_marginBottom="32dp"
         android:background="@drawable/circular_button"
@@ -86,5 +86,18 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:srcCompat="@drawable/baseline_library_add_24" />
+
+    <ImageView
+        android:id="@+id/getGifticonButton"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_marginBottom="24dp"
+        android:background="@drawable/circular_button"
+        android:padding="4dp"
+        android:backgroundTint = "@color/white_yellow"
+        app:layout_constraintBottom_toTopOf="@+id/addGifticonButton"
+        app:layout_constraintEnd_toEndOf="@+id/addGifticonButton"
+        app:layout_constraintStart_toStartOf="@+id/addGifticonButton"
+        app:srcCompat="@drawable/baseline_get_app_24" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
