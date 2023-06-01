@@ -12,15 +12,10 @@ class TagMenuModal(
 ){
     private val inflater = LayoutInflater.from(context)
     private val dialogLayout = inflater.inflate(R.layout.tag_menu_modal, null)
-    private val cancelTagMenuBtn = dialogLayout
-        .findViewById<androidx.appcompat.widget.AppCompatImageButton>(R.id.tagMenuCancelButton)
     private val tagDialog = androidx.appcompat.app.AlertDialog.Builder(context).create()
 
     init {
         tagDialog.setView(dialogLayout)
-        cancelTagMenuBtn.setOnClickListener {
-            tagDialog.cancel()
-        }
 
         setupTagMenuRecycleView()
     }
