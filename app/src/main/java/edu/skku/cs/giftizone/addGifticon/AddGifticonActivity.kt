@@ -82,4 +82,39 @@ class AddGifticonActivity : AppCompatActivity() {
             addTagDropdown.adapter = adapter
         }
     }
+
+    private fun isValidGifticon(): Boolean {
+        val barcode = findViewById<EditText>(R.id.barcodeEdit).text.toString()
+        if (barcode.isEmpty()) {
+            toast("바코드를 입력해주세요.")
+            return false
+        }
+
+        val gifticonProvider = findViewById<EditText>(R.id.providerEdit).text.toString()
+        if (gifticonProvider.isEmpty()) {
+            toast("사용처를 입력해주세요.")
+            return false
+        }
+
+        val gifticonContent = findViewById<EditText>(R.id.contentEdit).text.toString()
+        if (gifticonContent.isEmpty()) {
+            toast("상품명을 입력해주세요.")
+            return false
+        }
+
+        if (expiredDate == null) {
+            toast("유효기간을 선택해주세요.")
+            return false
+        }
+        
+        if (selectedTag == null) {
+            toast("태그를 선택해주세요.")
+            return false
+        }
+        return true
+    }
+
+    private fun toast(message: String) {
+        Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
+    }
 }
