@@ -133,7 +133,7 @@ class GifticonListActivity : AppCompatActivity() {
         addGifticonBtn.setOnClickListener {
             val intent = Intent(this, AddGifticonActivity::class.java)
 
-            intent.putExtra("tagList", tagList)
+            intent.putStringArrayListExtra("tagList", tagList)
             startActivity(intent)
         }
     }

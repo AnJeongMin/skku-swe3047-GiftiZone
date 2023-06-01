@@ -13,10 +13,13 @@ import androidx.appcompat.app.AppCompatActivity
 import com.bumptech.glide.Glide
 import edu.skku.cs.giftizone.R
 import edu.skku.cs.giftizone.enums.SortFilter
+import java.time.LocalDate
 import java.util.*
 
 class AddGifticonActivity : AppCompatActivity() {
-//    private val tagList: ArrayList<String>? = intent.getStringArrayListExtra("tagList")
+    private var tagList: ArrayList<String>? = null
+    private var selectedTag: String? = null
+    private var expiredDate: LocalDate? = null
     private val pickImageResultLauncher = registerForActivityResult(ActivityResultContracts.GetContent()) { uri: Uri? ->
         val gifticonImage = findViewById<ImageView>(R.id.addGifticonImage)
         if (uri != null) {
@@ -29,9 +32,11 @@ class AddGifticonActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_add_gifticon)
+        tagList = intent.getStringArrayListExtra("tagList")
 
         pickImageFromGallery()
         setupSelectExpireDate()
+        setupTagSelectDropdown()
     }
 
     private fun pickImageFromGallery() {
@@ -50,10 +55,30 @@ class AddGifticonActivity : AppCompatActivity() {
             val datePickerDialog = DatePickerDialog(this, { _, selectedYear, selectedMonth, selectedDay ->
                 expireDateText.text = "$selectedYear/${selectedMonth+1}/$selectedDay"
             }, year, month, day)
+            expiredDate = LocalDate.of(year, month+1, day)
 
             datePickerDialog.show()
         }
     }
 
+    private fun setupTagSelectDropdown() {
+        val addTagDropdown: Spinner = findViewById(R.id.addTagDropdown)
 
+        addTagDropdown.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+            override fun onItemSelected(parent: AdapterView<*>, view: View?, position: Int, id: Long) {
+                selectedTag = parent.getItemAtPosition(position).toString()
+            }
+            override fun onNothingSelected(parent: AdapterView<*>) {
+                selectedTag = parent.getItemAtPosition(0).toString()
+            }
+        }
+
+        ArrayAdapter(this,
+            android.R.layout.simple_spinner_item,
+            tagList!!)
+            .also { adapter ->
+            adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+            addTagDropdown.adapter = adapter
+        }
+    }
 }
