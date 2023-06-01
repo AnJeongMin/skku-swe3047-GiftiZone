@@ -30,6 +30,13 @@ android {
     kotlinOptions {
         jvmTarget = '1.8'
     }
+
+    Properties properties = new Properties()
+    properties.load(project.rootProject.file('local.properties').newDataInputStream())
+
+    defaultConfig {
+        buildConfigField "String", "kakao_api_key", "\"${properties.getProperty('kakao_api_key')}\""
+    }
 }
 
 dependencies {
