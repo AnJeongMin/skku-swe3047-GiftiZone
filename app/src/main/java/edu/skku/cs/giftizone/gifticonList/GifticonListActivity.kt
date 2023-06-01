@@ -1,10 +1,13 @@
 package edu.skku.cs.giftizone.gifticonList
 
+import android.app.Activity
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.widget.*
+import androidx.activity.result.ActivityResult
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import edu.skku.cs.giftizone.R
@@ -78,7 +81,6 @@ class GifticonListActivity : AppCompatActivity() {
             override fun onItemSelected(parent: AdapterView<*>, view: View?, position: Int, id: Long) {
                 sortFilter = SortFilter.values()[position]
                 updateGifticonFilter()
-
             }
             override fun onNothingSelected(parent: AdapterView<*>) {
                 sortFilter = SortFilter.LIMIT
@@ -129,12 +131,25 @@ class GifticonListActivity : AppCompatActivity() {
     }
 
     private fun setupAddGifticonActivity() {
+        val startForResult = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
+                result: ActivityResult ->
+            if (result.resultCode == Activity.RESULT_OK) {
+                val data: Intent? = result.data
+                val gifticon: Gifticon? = data?.getParcelableExtra("gifticon")
+                if (gifticon != null) {
+                    gifticonList.add(gifticon)
+                    updateRecycleData()
+                    updateGifticonFilter()
+                }
+            }
+        }
+
         val addGifticonBtn = findViewById<ImageView>(R.id.addGifticonButton)
         addGifticonBtn.setOnClickListener {
             val intent = Intent(this, AddGifticonActivity::class.java)
 
             intent.putStringArrayListExtra("tagList", tagList)
-            startActivity(intent)
+            startForResult.launch(intent)
         }
     }
 }

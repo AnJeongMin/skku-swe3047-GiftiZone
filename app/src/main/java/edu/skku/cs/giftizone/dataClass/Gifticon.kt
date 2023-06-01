@@ -5,7 +5,7 @@ import android.os.Parcelable
 import java.time.LocalDate
 import java.util.UUID
 
-data class Gifticon constructor(
+data class Gifticon (
     val imagePath: String,
     val barcode: String,
     val tag: String,
@@ -15,7 +15,7 @@ data class Gifticon constructor(
     val createAt: LocalDate = LocalDate.now(),
     val id: String = UUID.randomUUID().toString()
 ): Parcelable {
-    constructor(parcel: android.os.Parcel) : this(
+    constructor(parcel: Parcel) : this(
         parcel.readString()!!,
         parcel.readString()!!,
         parcel.readString()!!,
@@ -32,6 +32,8 @@ data class Gifticon constructor(
         parcel.writeString(tag)
         parcel.writeString(provider)
         parcel.writeString(content)
+        parcel.writeString(expiredAt.toString())
+        parcel.writeString(createAt.toString())
         parcel.writeString(id)
     }
 
