@@ -22,12 +22,12 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
-        android:layout_marginTop="24dp"
+        android:layout_marginTop="16dp"
         android:text="유효기간"
         android:textColor="@color/black"
         android:textSize="20sp"
         app:layout_constraintStart_toStartOf="@+id/contentEdit"
-        app:layout_constraintTop_toBottomOf="@+id/contentEdit" />
+        app:layout_constraintTop_toBottomOf="@+id/barcodeEdit" />
 
     <EditText
         android:id="@+id/barcodeEdit"
@@ -46,12 +46,12 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="4dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="24dp"
         android:text="사용처"
         android:textColor="@color/black"
         android:textSize="20sp"
         app:layout_constraintStart_toStartOf="@+id/addGifticonImage"
-        app:layout_constraintTop_toBottomOf="@+id/barcodeEdit" />
+        app:layout_constraintTop_toBottomOf="@+id/addGifticonImage" />
 
     <TextView
         android:id="@+id/textView7"
@@ -82,12 +82,12 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="4dp"
-        android:layout_marginTop="24dp"
+        android:layout_marginTop="16dp"
         android:text="바코드"
         android:textColor="@color/black"
         android:textSize="20sp"
         app:layout_constraintStart_toStartOf="@+id/addGifticonImage"
-        app:layout_constraintTop_toBottomOf="@+id/addGifticonImage" />
+        app:layout_constraintTop_toBottomOf="@+id/contentEdit" />
 
     <EditText
         android:id="@+id/providerEdit"
