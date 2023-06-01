@@ -15,6 +15,7 @@ import edu.skku.cs.giftizone.addGifticon.AddGifticonActivity
 import edu.skku.cs.giftizone.dataClass.Gifticon
 import edu.skku.cs.giftizone.enums.SortFilter
 import java.time.LocalDate
+import java.time.Period
 import java.time.temporal.ChronoUnit
 
 class GifticonListActivity : AppCompatActivity() {
@@ -22,11 +23,9 @@ class GifticonListActivity : AppCompatActivity() {
 //    private val gifticonList = ArrayList<Gifticon>()
     private val selectedTag = HashSet<String>()
 
-    private val tagList = arrayListOf("tag1", "tag2", "tag3")
-    private val gifticonList = arrayListOf(Gifticon("", "123-123", "tag1", "ABQ", "황올1", LocalDate.now().plus(1, ChronoUnit.WEEKS)),
-    Gifticon("", "123-123", "tag2", "BBQ", "황올2", LocalDate.now().plus(-3, ChronoUnit.WEEKS), LocalDate.now().plus(-3, ChronoUnit.DAYS)),
-    Gifticon("", "123-123", "tag3", "CBQ", "황올3", LocalDate.now().plus(1, ChronoUnit.WEEKS), LocalDate.now().plus(-4, ChronoUnit.DAYS)))
-
+    private val tagList = arrayListOf("tag1", "tag2")
+    private val gifticonList = arrayListOf(Gifticon("/storage/emulated/0/Android/data/edu.skku.cs.giftizone/files/Pictures/1685614862866.jpg", "1234-5678", "tag1", "교촌", "허니콤보", LocalDate.now().plus(5, ChronoUnit.DAYS)),
+        Gifticon("/storage/emulated/0/Android/data/edu.skku.cs.giftizone/files/Pictures/1685614862866.jpg", "1234-5678", "tag2", "BBQ", "황금 올리브", LocalDate.now().plus(-3, ChronoUnit.DAYS)))
 
     private var sortFilter = SortFilter.LIMIT
 
@@ -145,7 +144,7 @@ class GifticonListActivity : AppCompatActivity() {
         val addGifticonBtn = findViewById<ImageView>(R.id.addGifticonButton)
         addGifticonBtn.setOnClickListener {
             if (tagList.isEmpty()) {
-                Toast.makeText(this, "태그를 먼저 추가해주세요.", Toast.LENGTH_SHORT).show()
+                toast("태그를 먼저 추가해주세요.")
                 return@setOnClickListener
             }
             val intent = Intent(this, AddGifticonActivity::class.java)
@@ -154,4 +153,6 @@ class GifticonListActivity : AppCompatActivity() {
             startForResult.launch(intent)
         }
     }
+
+    private fun toast(message: String) = Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
 }

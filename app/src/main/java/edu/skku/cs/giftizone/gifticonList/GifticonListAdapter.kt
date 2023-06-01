@@ -125,8 +125,4 @@ class GifticonListAdapter(
     fun setSortFilter(sortFilter: SortFilter) {
         this.sortFilter = sortFilter
     }
-
-    private fun setupGifticonRemoveModal() {
-
-    }
 }
