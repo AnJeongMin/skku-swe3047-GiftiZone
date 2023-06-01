@@ -160,7 +160,7 @@ class GifticonListActivity : AppCompatActivity() {
     private fun setupInputGifticonModal() {
         val inputGifticonBtn = findViewById<ImageView>(R.id.getGifticonButton)
         inputGifticonBtn.setOnClickListener {
-            val inputGifticonModal = InputGifticonModal(this) { gifticon ->
+            val inputGifticonModal = GetGifticonModal(this) { gifticon ->
                 gifticonList.add(gifticon)
                 updateRecycleData()
                 updateGifticonFilter()
