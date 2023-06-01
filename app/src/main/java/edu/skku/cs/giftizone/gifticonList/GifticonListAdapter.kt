@@ -2,6 +2,7 @@ package edu.skku.cs.giftizone.gifticonList
 
 import android.content.Context
 import android.graphics.Color
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,9 +12,11 @@ import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import edu.skku.cs.giftizone.R
 import edu.skku.cs.giftizone.dataClass.Gifticon
 import edu.skku.cs.giftizone.enums.SortFilter
+import java.io.File
 import java.time.LocalDate
 import java.time.Period
 import java.time.format.TextStyle
@@ -57,10 +60,11 @@ class GifticonListAdapter(
 
     override fun onBindViewHolder(holder: GifticonViewHolder, position: Int) {
         val gifticon = filteredGifticonList[position]
-//        holder.gifticonImage.setBackgroundResource(gifticon.imagePath)
+        Glide.with(context)
+            .load(File(gifticon.imagePath))
+            .into(holder.gifticonImage)
         holder.gifticonProvider.text = gifticon.provider
         holder.gifticonContent.text = gifticon.content
-
         val weekDay = gifticon.expiredAt.dayOfWeek.getDisplayName(TextStyle.SHORT, Locale.KOREAN)
         holder.gifticonExpireDate.text = "${gifticon.expiredAt} (${weekDay})"
         val dDay = Period.between(LocalDate.now(), gifticon.expiredAt).days
