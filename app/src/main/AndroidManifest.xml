@@ -12,6 +12,9 @@
         android:theme="@style/Theme.GiftiZone"
         tools:targetApi="31">
         <activity
+            android:name=".gifticonMap.GifticonMapActivity"
+            android:exported="false" />
+        <activity
             android:name=".gifticonInfo.GifticonInfoActivity"
             android:exported="false" />
         <activity
@@ -26,13 +29,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="***REMOVED***" />
     </application>
-    <uses-permission android:name="android.permission.INTERNET">
-    </uses-permission>
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION">
-    </uses-permission>
-    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION">
-    </uses-permission>
-    <meta-data android:name="com.kakao.sdk.AppKey" android:value="${kakao_api_key}"/>
-
+    <uses-permission android:name="android.permission.INTERNET" />
 </manifest>
