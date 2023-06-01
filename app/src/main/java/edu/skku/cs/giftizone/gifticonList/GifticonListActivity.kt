@@ -10,13 +10,12 @@ import androidx.activity.result.ActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import edu.skku.cs.giftizone.GifticonInfoActivity
+import edu.skku.cs.giftizone.gifticonInfo.GifticonInfoActivity
 import edu.skku.cs.giftizone.R
 import edu.skku.cs.giftizone.addGifticon.AddGifticonActivity
 import edu.skku.cs.giftizone.dataClass.Gifticon
 import edu.skku.cs.giftizone.enums.SortFilter
 import java.time.LocalDate
-import java.time.Period
 import java.time.temporal.ChronoUnit
 
 class GifticonListActivity : AppCompatActivity() {

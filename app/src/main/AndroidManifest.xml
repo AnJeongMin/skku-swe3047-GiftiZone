@@ -12,7 +12,7 @@
         android:theme="@style/Theme.GiftiZone"
         tools:targetApi="31">
         <activity
-            android:name=".GifticonInfoActivity"
+            android:name=".gifticonInfo.GifticonInfoActivity"
             android:exported="false" />
         <activity
             android:name=".addGifticon.AddGifticonActivity"

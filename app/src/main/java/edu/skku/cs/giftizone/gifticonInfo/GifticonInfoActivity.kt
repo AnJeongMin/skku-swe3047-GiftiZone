@@ -1,8 +1,9 @@
-package edu.skku.cs.giftizone
+package edu.skku.cs.giftizone.gifticonInfo
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.bumptech.glide.Glide
+import edu.skku.cs.giftizone.R
 import edu.skku.cs.giftizone.dataClass.Gifticon
 
 class GifticonInfoActivity : AppCompatActivity() {
