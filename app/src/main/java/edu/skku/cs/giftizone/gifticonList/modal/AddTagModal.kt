@@ -1,4 +1,4 @@
-package edu.skku.cs.giftizone.gifticonList
+package edu.skku.cs.giftizone.gifticonList.modal
 
 import android.content.Context
 import android.view.LayoutInflater

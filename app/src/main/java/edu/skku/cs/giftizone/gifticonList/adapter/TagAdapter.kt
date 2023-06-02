@@ -1,4 +1,4 @@
-package edu.skku.cs.giftizone.gifticonList
+package edu.skku.cs.giftizone.gifticonList.adapter
 
 import android.view.LayoutInflater
 import android.view.View

@@ -15,8 +15,11 @@ import edu.skku.cs.giftizone.R
 import edu.skku.cs.giftizone.addGifticon.AddGifticonActivity
 import edu.skku.cs.giftizone.dataClass.Gifticon
 import edu.skku.cs.giftizone.enums.SortFilter
-import java.time.LocalDate
-import java.time.temporal.ChronoUnit
+import edu.skku.cs.giftizone.gifticonList.adapter.GifticonListAdapter
+import edu.skku.cs.giftizone.gifticonList.adapter.TagAdapter
+import edu.skku.cs.giftizone.gifticonList.modal.AddTagModal
+import edu.skku.cs.giftizone.gifticonList.modal.GetGifticonModal
+import edu.skku.cs.giftizone.gifticonList.modal.TagMenuModal
 
 class GifticonListActivity : AppCompatActivity() {
     private val tagList = ArrayList<String>()

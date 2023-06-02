@@ -1,4 +1,4 @@
-package edu.skku.cs.giftizone.gifticonList
+package edu.skku.cs.giftizone.gifticonList.modal
 
 import android.content.Context
 import android.os.Handler
@@ -7,12 +7,9 @@ import android.view.LayoutInflater
 import edu.skku.cs.giftizone.R
 import edu.skku.cs.giftizone.dataClass.Gifticon
 import okhttp3.*
-import okhttp3.MediaType.Companion.toMediaType
-import okhttp3.RequestBody.Companion.toRequestBody
 import org.json.JSONObject
 import java.io.IOException
 import java.time.LocalDate
-import java.util.*
 
 class GetGifticonModal(
     private val context: Context,
