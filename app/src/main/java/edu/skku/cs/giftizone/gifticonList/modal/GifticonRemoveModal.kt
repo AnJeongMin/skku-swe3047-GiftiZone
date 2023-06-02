@@ -7,7 +7,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import com.bumptech.glide.Glide
 import edu.skku.cs.giftizone.R
-import edu.skku.cs.giftizone.dataClass.Gifticon
+import edu.skku.cs.giftizone.common.Gifticon
 
 class GifticonRemoveModal(
     private val context: Context,

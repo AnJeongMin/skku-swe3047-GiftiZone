@@ -13,7 +13,9 @@ import androidx.recyclerview.widget.RecyclerView
 import edu.skku.cs.giftizone.gifticonInfo.GifticonInfoActivity
 import edu.skku.cs.giftizone.R
 import edu.skku.cs.giftizone.addGifticon.AddGifticonActivity
-import edu.skku.cs.giftizone.dataClass.Gifticon
+import edu.skku.cs.giftizone.common.Gifticon
+import edu.skku.cs.giftizone.common.GifticonRepository
+import edu.skku.cs.giftizone.common.TagRepository
 import edu.skku.cs.giftizone.enums.SortFilter
 import edu.skku.cs.giftizone.gifticonList.adapter.GifticonListAdapter
 import edu.skku.cs.giftizone.gifticonList.adapter.TagAdapter
@@ -22,6 +24,9 @@ import edu.skku.cs.giftizone.gifticonList.modal.GetGifticonModal
 import edu.skku.cs.giftizone.gifticonList.modal.TagMenuModal
 
 class GifticonListActivity : AppCompatActivity() {
+    private val gifticonRepository = GifticonRepository(this)
+    private val tagRepository = TagRepository(this)
+
     private val tagList = ArrayList<String>()
     private val gifticonList = ArrayList<Gifticon>()
     private val selectedTag = HashSet<String>()
@@ -35,10 +40,12 @@ class GifticonListActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_gifticon_list)
+        gifticonList.addAll(gifticonRepository.getAllGifticons())
+        tagList.addAll(tagRepository.getAllTags())
 
         setupAddTagModal()
         setupTagMenuModal()
-        setupDropdown()
+        setupFilterDropdown()
         setupInputGifticonModal()
 
         setupTagRecycleView()
@@ -52,6 +59,7 @@ class GifticonListActivity : AppCompatActivity() {
         tagAddBtn.setOnClickListener {
             val addTagModal = AddTagModal(this, tagList) { tag ->
                 tagList.add(tag)
+                tagRepository.saveTag(tag)
                 updateRecycleData()
             }
             addTagModal.show()
@@ -64,6 +72,7 @@ class GifticonListActivity : AppCompatActivity() {
             val tagMenuModal = TagMenuModal(this, tagList) {
                 tagList.remove(it)
                 selectedTag.remove(it)
+                tagRepository.deleteTag(it)
                 updateRecycleData()
                 updateGifticonFilter()
             }
@@ -71,7 +80,7 @@ class GifticonListActivity : AppCompatActivity() {
         }
     }
 
-    private fun setupDropdown() {
+    private fun setupFilterDropdown() {
         val filterDropdown: Spinner = findViewById(R.id.filterDropdown)
 
         filterDropdown.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
@@ -110,9 +119,9 @@ class GifticonListActivity : AppCompatActivity() {
         gifticonRecyclerView = findViewById(R.id.gifticonListView)
         val layoutManager = LinearLayoutManager(this)
         gifticonRecyclerView?.layoutManager = layoutManager
-        gifticonRecyclerView?.adapter = GifticonListAdapter(this, gifticonList, selectedTag, sortFilter) {
-            gifticonInfoActivityHandler(it)
-        }
+        gifticonRecyclerView?.adapter = GifticonListAdapter(this, gifticonList, selectedTag, sortFilter,
+            { gifticon: Gifticon -> gifticonInfoActivityHandler(gifticon) },
+            { gifticon: Gifticon -> gifticonRepository.deleteGifticon(gifticon.id) })
 
         recyclerViewList.add(gifticonRecyclerView!!)
     }
@@ -137,6 +146,7 @@ class GifticonListActivity : AppCompatActivity() {
                 val gifticon: Gifticon? = data?.getParcelableExtra("gifticon")
                 if (gifticon != null) {
                     gifticonList.add(gifticon)
+                    gifticonRepository.saveGifticon(gifticon)
                     updateRecycleData()
                     updateGifticonFilter()
                 }
@@ -161,6 +171,7 @@ class GifticonListActivity : AppCompatActivity() {
         inputGifticonBtn.setOnClickListener {
             val inputGifticonModal = GetGifticonModal(this) { gifticon ->
                 gifticonList.add(gifticon)
+                gifticonRepository.saveGifticon(gifticon)
                 updateRecycleData()
                 updateGifticonFilter()
             }

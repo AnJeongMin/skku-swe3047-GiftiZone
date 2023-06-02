@@ -3,7 +3,6 @@ package edu.skku.cs.giftizone.gifticonInfo
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
@@ -11,7 +10,7 @@ import com.bumptech.glide.Glide
 import com.google.gson.Gson
 import com.google.gson.JsonObject
 import edu.skku.cs.giftizone.R
-import edu.skku.cs.giftizone.dataClass.Gifticon
+import edu.skku.cs.giftizone.common.Gifticon
 import edu.skku.cs.giftizone.gifticonMap.GifticonMapActivity
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -21,8 +20,6 @@ import okhttp3.*
 import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.RequestBody.Companion.toRequestBody
 import java.io.IOException
-import java.nio.file.Files
-import java.nio.file.Paths
 import java.util.*
 
 class GifticonInfoActivity : AppCompatActivity() {

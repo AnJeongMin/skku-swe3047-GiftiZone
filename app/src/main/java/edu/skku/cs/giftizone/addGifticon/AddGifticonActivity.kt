@@ -7,16 +7,13 @@ import android.graphics.BitmapFactory
 import android.net.Uri
 import android.os.Bundle
 import android.os.Environment
-import android.provider.MediaStore
-import android.util.Log
 import android.view.View
 import android.widget.*
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import com.bumptech.glide.Glide
 import edu.skku.cs.giftizone.R
-import edu.skku.cs.giftizone.dataClass.Gifticon
-import edu.skku.cs.giftizone.enums.SortFilter
+import edu.skku.cs.giftizone.common.Gifticon
 import java.io.File
 import java.io.FileOutputStream
 import java.io.IOException

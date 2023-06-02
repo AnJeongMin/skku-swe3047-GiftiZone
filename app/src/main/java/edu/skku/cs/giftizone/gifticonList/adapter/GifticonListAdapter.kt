@@ -13,7 +13,7 @@ import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import edu.skku.cs.giftizone.R
-import edu.skku.cs.giftizone.dataClass.Gifticon
+import edu.skku.cs.giftizone.common.Gifticon
 import edu.skku.cs.giftizone.enums.SortFilter
 import edu.skku.cs.giftizone.gifticonList.modal.GifticonRemoveModal
 import java.io.File
@@ -28,6 +28,7 @@ class GifticonListAdapter(
     private val selectedTag: HashSet<String>,
     private var sortFilter: SortFilter,
     private val gifticonInfoHandler: (gifticon: Gifticon) -> Unit,
+    private val gifticonRemoveHandler: (gifticon: Gifticon) -> Unit,
     ) :
     RecyclerView.Adapter<GifticonListAdapter.GifticonViewHolder>(), Filterable {
 
@@ -55,6 +56,7 @@ class GifticonListAdapter(
                 val selectedGifticon = filteredGifticonList[adapterPosition]
                 val gifticonRemoveModal = GifticonRemoveModal(context, selectedGifticon) {
                     originGifticonList.removeIf { gifticon -> gifticon.id == selectedGifticon.id }
+                    gifticonRemoveHandler(selectedGifticon)
                     filter.filter(null)
                 }
                 gifticonRemoveModal.show()

@@ -5,7 +5,7 @@ import android.os.Handler
 import android.os.Looper
 import android.view.LayoutInflater
 import edu.skku.cs.giftizone.R
-import edu.skku.cs.giftizone.dataClass.Gifticon
+import edu.skku.cs.giftizone.common.Gifticon
 import okhttp3.*
 import org.json.JSONObject
 import java.io.IOException
