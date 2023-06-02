@@ -153,12 +153,6 @@ class AddGifticonActivity : AppCompatActivity() {
     }
 
     private fun isValidGifticon(): Boolean {
-        val barcode = findViewById<EditText>(R.id.barcodeEdit).text.toString()
-        if (barcode.isEmpty()) {
-            toast("바코드를 입력해주세요.")
-            return false
-        }
-
         val gifticonProvider = findViewById<EditText>(R.id.providerEdit).text.toString()
         if (gifticonProvider.isEmpty()) {
             toast("사용처를 입력해주세요.")
@@ -168,6 +162,12 @@ class AddGifticonActivity : AppCompatActivity() {
         val gifticonContent = findViewById<EditText>(R.id.contentEdit).text.toString()
         if (gifticonContent.isEmpty()) {
             toast("상품명을 입력해주세요.")
+            return false
+        }
+
+        val barcode = findViewById<EditText>(R.id.barcodeEdit).text.toString()
+        if (barcode.isEmpty()) {
+            toast("바코드를 입력해주세요.")
             return false
         }
 
