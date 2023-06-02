@@ -1,4 +1,4 @@
-package edu.skku.cs.giftizone.dataClass
+package edu.skku.cs.giftizone.common
 
 import android.os.Parcel
 import android.os.Parcelable
