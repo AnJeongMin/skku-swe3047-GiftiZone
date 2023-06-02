@@ -85,7 +85,7 @@ class GifticonInfoActivity : AppCompatActivity() {
 
     private fun requestGifticonShare(gifticon: Gifticon, shareId: String) {
         val client = OkHttpClient()
-        val url = "http://172.26.10.73:4000/share/gifticon"
+        val url = "***REMOVED***/share/gifticon"
 
         val jsonString = gifticon2json(gifticon, shareId)
         val requestBody = jsonString.toRequestBody("application/json; charset=utf-8".toMediaType())
@@ -100,7 +100,9 @@ class GifticonInfoActivity : AppCompatActivity() {
             }
 
             override fun onResponse(call: Call, response: Response) {
-                toast("공유가 정상적으로 되었습니다.")
+                runOnUiThread {
+                    toast("공유가 정상적으로 되었습니다.")
+                }
             }
         })
     }
@@ -114,22 +116,19 @@ class GifticonInfoActivity : AppCompatActivity() {
 
     private fun gifticon2json(gifticon: Gifticon, shareId: String): String {
         val jsonObject = JsonObject()
-        val imagePath = gifticon.imagePath
-
         val gifticonJson = Gson().toJsonTree(gifticon).asJsonObject
         gifticonJson.addProperty("createAt", gifticon.createAt.toString())
         gifticonJson.addProperty("expiredAt", gifticon.expiredAt.toString())
 
         jsonObject.add("gifticon", gifticonJson)
-        jsonObject.addProperty("image", encodeImageToBase64(imagePath))
         jsonObject.addProperty("shareId", shareId)
         return jsonObject.toString()
     }
 
-    private fun encodeImageToBase64(imagePath: String): String {
-        val imageBytes = Files.readAllBytes(Paths.get(imagePath))
-        return Base64.getEncoder().encodeToString(imageBytes)
-    }
+//    private fun encodeImageToBase64(imagePath: String): String {
+//        val imageBytes = Files.readAllBytes(Paths.get(imagePath))
+//        return Base64.getEncoder().encodeToString(imageBytes)
+//    }
 
     private fun toast(message: String) {
         Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
