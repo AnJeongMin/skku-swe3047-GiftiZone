@@ -19,13 +19,9 @@ import java.time.LocalDate
 import java.time.temporal.ChronoUnit
 
 class GifticonListActivity : AppCompatActivity() {
-//    private val tagList = ArrayList<String>()
-//    private val gifticonList = ArrayList<Gifticon>()
+    private val tagList = ArrayList<String>()
+    private val gifticonList = ArrayList<Gifticon>()
     private val selectedTag = HashSet<String>()
-
-    private val tagList = arrayListOf("tag1", "tag2")
-    private val gifticonList = arrayListOf(Gifticon("/storage/emulated/0/Android/data/edu.skku.cs.giftizone/files/Pictures/1685614862866.jpg", "1234-5678", "tag1", "교촌", "허니콤보", LocalDate.now().plus(5, ChronoUnit.DAYS)),
-        Gifticon("/storage/emulated/0/Android/data/edu.skku.cs.giftizone/files/Pictures/1685614862866.jpg", "1234-5678", "tag2", "BBQ", "황금 올리브", LocalDate.now().plus(-3, ChronoUnit.DAYS)))
 
     private var sortFilter = SortFilter.LIMIT
 
