@@ -8,6 +8,7 @@ import android.widget.TextView
 import com.bumptech.glide.Glide
 import edu.skku.cs.giftizone.R
 import edu.skku.cs.giftizone.common.Gifticon
+import java.io.File
 
 class GifticonRemoveModal(
     private val context: Context,
@@ -37,6 +38,7 @@ class GifticonRemoveModal(
 
         confirmRemoveBtn.setOnClickListener {
             removeGifticonHandler()
+            deleteGifticonImage(gifticon.imagePath)
             removeGifticonDialog.dismiss()
         }
         cancelRemoveBtn.setOnClickListener {
@@ -46,5 +48,11 @@ class GifticonRemoveModal(
 
     fun show() {
         removeGifticonDialog.show()
+    }
+
+    private fun deleteGifticonImage(path: String) {
+        val file = File(path)
+        if (file.exists())
+            file.delete()
     }
 }
