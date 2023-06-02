@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.widget.ImageView
+import android.widget.TextView
 import android.widget.Toast
 import com.bumptech.glide.Glide
 import com.google.gson.Gson
@@ -33,16 +34,23 @@ class GifticonInfoActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_gifticon_info)
 
-        setupGifticonInfoImage()
+        setupGifticonInfo()
         setupGifticonMapButton()
         setupGifticonShareButton()
     }
 
-    private fun setupGifticonInfoImage() {
+    private fun setupGifticonInfo() {
         gifticon = intent.getParcelableExtra("gifticon")
-        Glide.with(this)
-            .load(gifticon?.imagePath)
-            .into(findViewById(R.id.gifticonInfoImage))
+        val gifticonInfoImage = findViewById<ImageView>(R.id.gifticonInfoImage)
+        if (gifticon?.imagePath == "") {
+            gifticonInfoImage.setImageResource(R.drawable.baseline_web_asset_off_24)
+        } else {
+            Glide.with(this)
+                .load(gifticon?.imagePath)
+                .into(gifticonInfoImage)
+        }
+        val gifticonInfoBarcode = findViewById<TextView>(R.id.gifticonInfoBarcode)
+        gifticonInfoBarcode.text = gifticon?.barcode
     }
 
     private fun setupGifticonMapButton() {

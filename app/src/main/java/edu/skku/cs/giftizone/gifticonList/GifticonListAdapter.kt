@@ -71,9 +71,13 @@ class GifticonListAdapter(
 
     override fun onBindViewHolder(holder: GifticonViewHolder, position: Int) {
         val gifticon = filteredGifticonList[position]
-        Glide.with(context)
-            .load(File(gifticon.imagePath))
-            .into(holder.gifticonImage)
+        if (gifticon.imagePath == "") {
+            holder.gifticonImage.setImageResource(R.drawable.baseline_web_asset_off_24)
+        } else {
+            Glide.with(context)
+                .load(File(gifticon.imagePath))
+                .into(holder.gifticonImage)
+        }
         holder.gifticonProvider.text = gifticon.provider
         holder.gifticonContent.text = gifticon.content
         val weekDay = gifticon.expiredAt.dayOfWeek.getDisplayName(TextStyle.SHORT, Locale.KOREAN)

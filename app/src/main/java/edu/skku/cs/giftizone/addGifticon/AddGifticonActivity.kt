@@ -109,7 +109,8 @@ class AddGifticonActivity : AppCompatActivity() {
             val barcode = findViewById<EditText>(R.id.barcodeEdit).text.toString()
             val gifticonProvider = findViewById<EditText>(R.id.providerEdit).text.toString()
             val gifticonContent = findViewById<EditText>(R.id.contentEdit).text.toString()
-            val imagePath = saveBitmapImage(uri2bitmap(localImageUrl!!)!!)!!
+
+            val imagePath = if (localImageUrl == null) "" else saveBitmapImage(uri2bitmap(localImageUrl!!)!!)!!
             val gifticon = Gifticon(imagePath, barcode, selectedTag!!, gifticonProvider, gifticonContent, expiredDate!!)
             val intent = Intent()
             intent.putExtra("gifticon", gifticon)
@@ -152,11 +153,6 @@ class AddGifticonActivity : AppCompatActivity() {
     }
 
     private fun isValidGifticon(): Boolean {
-        if (localImageUrl == null) {
-            toast("이미지를 선택해주세요.")
-            return false
-        }
-
         val barcode = findViewById<EditText>(R.id.barcodeEdit).text.toString()
         if (barcode.isEmpty()) {
             toast("바코드를 입력해주세요.")

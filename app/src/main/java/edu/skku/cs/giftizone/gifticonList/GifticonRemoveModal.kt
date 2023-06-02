@@ -25,9 +25,13 @@ class GifticonRemoveModal(
 
     init {
         removeGifticonDialog.setView(dialogLayout)
-        Glide.with(context)
-            .load(gifticon.imagePath)
-            .into(removeGifticonImage)
+        if (gifticon.imagePath == "") {
+            removeGifticonImage.setImageResource(R.drawable.baseline_web_asset_off_24)
+        } else {
+            Glide.with(context)
+                .load(gifticon.imagePath)
+                .into(removeGifticonImage)
+        }
         removeGifticonProvider.text = gifticon.provider
         removeGifticonContent.text = gifticon.content
 
