@@ -9,6 +9,7 @@ import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
+import edu.skku.cs.giftizone.BuildConfig
 import edu.skku.cs.giftizone.R
 import edu.skku.cs.giftizone.common.toast
 import okhttp3.*
@@ -39,7 +40,7 @@ class GifticonMapActivity : AppCompatActivity(), OnMapReadyCallback {
 
     private fun setSearchedMarker(query: String) {
         val client = OkHttpClient()
-        val apiKey = "***REMOVED***"
+        val apiKey = BuildConfig.google_api_key
 
         val url = HttpUrl.Builder()
             .scheme("https")

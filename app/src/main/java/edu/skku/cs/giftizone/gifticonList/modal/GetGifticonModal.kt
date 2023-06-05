@@ -6,6 +6,7 @@ import android.os.Looper
 import android.view.LayoutInflater
 import androidx.appcompat.widget.AppCompatButton
 import androidx.appcompat.widget.AppCompatEditText
+import edu.skku.cs.giftizone.BuildConfig
 import edu.skku.cs.giftizone.R
 import edu.skku.cs.giftizone.common.BaseModal
 import edu.skku.cs.giftizone.common.Gifticon
@@ -31,7 +32,7 @@ class GetGifticonModal(
 
     private fun requestGetGifticon(shareId: String) {
         val client = OkHttpClient()
-        val url = "***REMOVED***/share/gifticon?shareId=$shareId"
+        val url = "${BuildConfig.server_origin}/share/gifticon?shareId=$shareId"
 
         val request = Request.Builder()
             .url(url)

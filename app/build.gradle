@@ -3,6 +3,9 @@ plugins {
     id 'org.jetbrains.kotlin.android'
 }
 
+Properties properties = new Properties()
+properties.load(project.rootProject.file('local.properties').newDataInputStream())
+
 android {
     namespace 'edu.skku.cs.giftizone'
     compileSdk 33
@@ -31,11 +34,10 @@ android {
         jvmTarget = '1.8'
     }
 
-    Properties properties = new Properties()
-    properties.load(project.rootProject.file('local.properties').newDataInputStream())
-
     defaultConfig {
-        buildConfigField "String", "google_api_key", "\"${properties.getProperty('google_api_key')}\""
+        buildConfigField "String", "server_origin", properties['server_origin']
+        buildConfigField "String", "google_api_key", properties['google_api_key']
+        manifestPlaceholders = [google_api_key: properties['google_api_key']]
     }
 }
 

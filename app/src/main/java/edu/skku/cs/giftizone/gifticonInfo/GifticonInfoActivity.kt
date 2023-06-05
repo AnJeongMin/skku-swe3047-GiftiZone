@@ -5,10 +5,10 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.ImageView
 import android.widget.TextView
-import android.widget.Toast
 import com.bumptech.glide.Glide
 import com.google.gson.Gson
 import com.google.gson.JsonObject
+import edu.skku.cs.giftizone.BuildConfig
 import edu.skku.cs.giftizone.R
 import edu.skku.cs.giftizone.common.Gifticon
 import edu.skku.cs.giftizone.common.toast
@@ -91,7 +91,7 @@ class GifticonInfoActivity : AppCompatActivity() {
 
     private fun requestGifticonShare(gifticon: Gifticon, shareId: String) {
         val client = OkHttpClient()
-        val url = "***REMOVED***/share/gifticon"
+        val url = "${BuildConfig.server_origin}/share/gifticon"
 
         val jsonString = gifticon2json(gifticon, shareId)
         val requestBody = jsonString.toRequestBody("application/json; charset=utf-8".toMediaType())
