@@ -11,6 +11,7 @@ import com.google.gson.Gson
 import com.google.gson.JsonObject
 import edu.skku.cs.giftizone.R
 import edu.skku.cs.giftizone.common.Gifticon
+import edu.skku.cs.giftizone.common.toast
 import edu.skku.cs.giftizone.gifticonMap.GifticonMapActivity
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -74,7 +75,7 @@ class GifticonInfoActivity : AppCompatActivity() {
 
     private fun isShareDelay(): Boolean {
         if (shareDelay > 0) {
-            toast("공유는 ${shareDelay}초 후에 가능합니다.")
+            toast(this, "공유는 ${shareDelay}초 후에 가능합니다.")
             return false
         }
         shareDelay = SHARE_DELAY
@@ -106,7 +107,7 @@ class GifticonInfoActivity : AppCompatActivity() {
 
             override fun onResponse(call: Call, response: Response) {
                 runOnUiThread {
-                    toast("공유가 정상적으로 되었습니다.")
+                    toast(this@GifticonInfoActivity, "공유가 정상적으로 되었습니다.")
                 }
             }
         })
@@ -134,8 +135,4 @@ class GifticonInfoActivity : AppCompatActivity() {
 //        val imageBytes = Files.readAllBytes(Paths.get(imagePath))
 //        return Base64.getEncoder().encodeToString(imageBytes)
 //    }
-
-    private fun toast(message: String) {
-        Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
-    }
 }

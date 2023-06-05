@@ -10,6 +10,7 @@ import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
 import edu.skku.cs.giftizone.R
+import edu.skku.cs.giftizone.common.toast
 import okhttp3.*
 import org.json.JSONObject
 import java.io.IOException
@@ -72,7 +73,7 @@ class GifticonMapActivity : AppCompatActivity(), OnMapReadyCallback {
                     var message = "검색 결과가 없습니다."
                     if (results.length() >= 0)
                         message = "${radius / 1000}km 내에 ${results.length()}개의 ${query}이(가) 있습니다."
-                    Toast.makeText(this@GifticonMapActivity, message, Toast.LENGTH_SHORT).show()
+                    toast(this@GifticonMapActivity, message)
                 }
 
                 for (i in 0 until results.length()) {

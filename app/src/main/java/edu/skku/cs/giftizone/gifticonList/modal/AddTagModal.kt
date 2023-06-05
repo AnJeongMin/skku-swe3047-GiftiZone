@@ -8,6 +8,7 @@ import android.widget.ImageButton
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import edu.skku.cs.giftizone.R
+import edu.skku.cs.giftizone.common.toast
 
 class AddTagModal(
     private val context: Context,
@@ -48,19 +49,19 @@ class AddTagModal(
 
     private fun isValidTag(tag: String): Boolean {
         if (tag.isEmpty()) {
-            Toast.makeText(context, "태그를 입력해주세요.", Toast.LENGTH_SHORT).show()
+            toast(context, "태그를 입력해주세요.")
             return false
         }
         if (tagList.contains(tag)) {
-            Toast.makeText(context, "이미 존재하는 태그입니다.", Toast.LENGTH_SHORT).show()
+            toast(context, "이미 존재하는 태그입니다.")
             return false
         }
         if (tag.length > MAX_TAG_LENGTH) {
-            Toast.makeText(context, "태그는 ${MAX_TAG_LENGTH}자 이내로 입력해주세요.", Toast.LENGTH_SHORT).show()
+            toast(context, "태그는 ${MAX_TAG_LENGTH}자 이내로 입력해주세요.")
             return false
         }
         if (tagList.size >= MAX_TAG_COUNT) {
-            Toast.makeText(context, "태그는 ${MAX_TAG_COUNT}개 까지만 추가할 수 있습니다.", Toast.LENGTH_SHORT).show()
+            toast(context, "태그는 ${MAX_TAG_COUNT}개 까지만 추가할 수 있습니다.")
             return false
         }
         return true

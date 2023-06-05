@@ -16,6 +16,7 @@ import edu.skku.cs.giftizone.addGifticon.AddGifticonActivity
 import edu.skku.cs.giftizone.common.Gifticon
 import edu.skku.cs.giftizone.common.GifticonRepository
 import edu.skku.cs.giftizone.common.TagRepository
+import edu.skku.cs.giftizone.common.toast
 import edu.skku.cs.giftizone.enums.SortFilter
 import edu.skku.cs.giftizone.gifticonList.adapter.GifticonListAdapter
 import edu.skku.cs.giftizone.gifticonList.adapter.TagAdapter
@@ -156,7 +157,7 @@ class GifticonListActivity : AppCompatActivity() {
         val addGifticonBtn = findViewById<ImageView>(R.id.addGifticonButton)
         addGifticonBtn.setOnClickListener {
             if (tagList.isEmpty()) {
-                toast("태그를 먼저 추가해주세요.")
+                toast(this, "태그를 먼저 추가해주세요.")
                 return@setOnClickListener
             }
             val intent = Intent(this, AddGifticonActivity::class.java)
@@ -184,6 +185,4 @@ class GifticonListActivity : AppCompatActivity() {
         intent.putExtra("gifticon", gifticon)
         startActivity(intent)
     }
-
-    private fun toast(message: String) = Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
 }

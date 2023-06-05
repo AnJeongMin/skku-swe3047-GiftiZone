@@ -6,6 +6,7 @@ import android.os.Looper
 import android.view.LayoutInflater
 import edu.skku.cs.giftizone.R
 import edu.skku.cs.giftizone.common.Gifticon
+import edu.skku.cs.giftizone.common.toast
 import okhttp3.*
 import org.json.JSONObject
 import java.io.IOException
@@ -45,19 +46,19 @@ class GetGifticonModal(
 
         client.newCall(request).enqueue(object: Callback {
             override fun onFailure(call: Call, e: IOException) {
-                toast("서버와의 연결이 원활하지 않습니다.")
+                toast(context, "서버와의 연결이 원활하지 않습니다.")
             }
 
             override fun onResponse(call: Call, response: Response) {
                 val body = response.body?.string()
                 if (body == null) {
-                    toast("서버와의 연결이 원활하지 않습니다.")
+                    toast(context, "서버와의 연결이 원활하지 않습니다.")
                     return
                 }
 
                 val share = JSONObject(body).getString("share")
                 if (share == "false") {
-                    toast("해당 share id와 관련된 gifticon이 없습니다.")
+                    toast(context, "해당 share id와 관련된 gifticon이 없습니다.")
                     return
                 }
                 val gifticon = JSONObject(body).getJSONObject("gifticon")
@@ -76,15 +77,8 @@ class GetGifticonModal(
                     addGifticonHandler(newGifticon)
                 }
 
-                toast("gifticon이 추가되었습니다.")
+                toast(context, "gifticon이 추가되었습니다.")
             }
         })
-    }
-
-    private fun toast(message: String) {
-        Handler(Looper.getMainLooper()).post {
-            android.widget.Toast.makeText(context, message, android.widget.Toast.LENGTH_SHORT)
-                .show()
-        }
     }
 }

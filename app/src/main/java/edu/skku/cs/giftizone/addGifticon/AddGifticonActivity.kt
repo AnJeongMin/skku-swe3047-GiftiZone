@@ -14,6 +14,7 @@ import androidx.appcompat.app.AppCompatActivity
 import com.bumptech.glide.Glide
 import edu.skku.cs.giftizone.R
 import edu.skku.cs.giftizone.common.Gifticon
+import edu.skku.cs.giftizone.common.toast
 import java.io.File
 import java.io.FileOutputStream
 import java.io.IOException
@@ -125,7 +126,7 @@ class AddGifticonActivity : AppCompatActivity() {
             return image
         } catch (e: IOException) {
             e.printStackTrace()
-            toast("이미지를 불러오는데 실패했습니다.")
+            toast(this, "이미지를 불러오는데 실패했습니다.")
             return null
         }
     }
@@ -142,7 +143,7 @@ class AddGifticonActivity : AppCompatActivity() {
             out.close()
         } catch (e: Exception) {
             e.printStackTrace()
-            toast("이미지를 저장하는데 실패했습니다.")
+            toast(this, "이미지를 저장하는데 실패했습니다.")
             return null
         }
 
@@ -152,33 +153,31 @@ class AddGifticonActivity : AppCompatActivity() {
     private fun isValidGifticon(): Boolean {
         val gifticonProvider = findViewById<EditText>(R.id.providerEdit).text.toString()
         if (gifticonProvider.isEmpty()) {
-            toast("사용처를 입력해주세요.")
+            toast(this, "사용처를 입력해주세요.")
             return false
         }
 
         val gifticonContent = findViewById<EditText>(R.id.contentEdit).text.toString()
         if (gifticonContent.isEmpty()) {
-            toast("상품명을 입력해주세요.")
+            toast(this, "상품명을 입력해주세요.")
             return false
         }
 
         val barcode = findViewById<EditText>(R.id.barcodeEdit).text.toString()
         if (barcode.isEmpty()) {
-            toast("바코드를 입력해주세요.")
+            toast(this, "바코드를 입력해주세요.")
             return false
         }
 
         if (expiredDate == null) {
-            toast("유효기간을 선택해주세요.")
+            toast(this, "유효기간을 선택해주세요.")
             return false
         }
         
         if (selectedTag == null) {
-            toast("태그를 선택해주세요.")
+            toast(this, "태그를 선택해주세요.")
             return false
         }
         return true
     }
-
-    private fun toast(message: String) = Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
 }

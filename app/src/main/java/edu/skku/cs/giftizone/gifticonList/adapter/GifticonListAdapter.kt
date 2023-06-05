@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import edu.skku.cs.giftizone.R
 import edu.skku.cs.giftizone.common.Gifticon
+import edu.skku.cs.giftizone.common.toast
 import edu.skku.cs.giftizone.enums.SortFilter
 import edu.skku.cs.giftizone.gifticonList.modal.GifticonRemoveModal
 import java.io.File
@@ -47,7 +48,7 @@ class GifticonListAdapter(
                 val selectedGifticon = filteredGifticonList[adapterPosition]
                 val dDay = Period.between(LocalDate.now(), selectedGifticon.expiredAt).days
                 if (dDay < 0) {
-                    Toast.makeText(context, "기간이 만료된 기프티콘입니다.", Toast.LENGTH_SHORT).show()
+                    toast(context, "기간이 만료된 기프티콘입니다.")
                     return@setOnClickListener
                 }
                 gifticonInfoHandler(selectedGifticon)
