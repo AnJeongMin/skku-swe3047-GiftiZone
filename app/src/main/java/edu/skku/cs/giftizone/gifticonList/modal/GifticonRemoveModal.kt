@@ -7,6 +7,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import com.bumptech.glide.Glide
 import edu.skku.cs.giftizone.R
+import edu.skku.cs.giftizone.common.BaseModal
 import edu.skku.cs.giftizone.common.Gifticon
 import java.io.File
 
@@ -14,18 +15,14 @@ class GifticonRemoveModal(
     private val context: Context,
     private val gifticon: Gifticon,
     private val removeGifticonHandler: () -> Unit,
-) {
-    private val inflater = LayoutInflater.from(context)
-    private val dialogLayout = inflater.inflate(R.layout.gifticon_remove_modal, null)
+): BaseModal(context, R.layout.gifticon_remove_modal) {
     private val cancelRemoveBtn = dialogLayout.findViewById<Button>(R.id.removeGifticonCancelButton)
     private val confirmRemoveBtn = dialogLayout.findViewById<Button>(R.id.removeGifticonConfirmButton)
     private val removeGifticonImage = dialogLayout.findViewById<ImageView>(R.id.removeGifticonImage)
     private val removeGifticonProvider = dialogLayout.findViewById<TextView>(R.id.removeGifticonProvider)
     private val removeGifticonContent = dialogLayout.findViewById<TextView>(R.id.removeGifticonContent)
-    private val removeGifticonDialog = androidx.appcompat.app.AlertDialog.Builder(context).create()
 
     init {
-        removeGifticonDialog.setView(dialogLayout)
         if (gifticon.imagePath == "") {
             removeGifticonImage.setImageResource(R.drawable.baseline_web_asset_off_24)
         } else {
@@ -38,19 +35,16 @@ class GifticonRemoveModal(
 
         confirmRemoveBtn.setOnClickListener {
             removeGifticonHandler()
-            deleteGifticonImage(gifticon.imagePath)
-            removeGifticonDialog.dismiss()
+            deleteGifticonImageFile(gifticon.imagePath)
+            dialog.dismiss()
         }
         cancelRemoveBtn.setOnClickListener {
-            removeGifticonDialog.cancel()
+            dialog.cancel()
         }
+        dialog.setView(dialogLayout)
     }
 
-    fun show() {
-        removeGifticonDialog.show()
-    }
-
-    private fun deleteGifticonImage(path: String) {
+    private fun deleteGifticonImageFile(path: String) {
         val file = File(path)
         if (file.exists())
             file.delete()

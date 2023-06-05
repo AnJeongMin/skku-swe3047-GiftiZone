@@ -8,43 +8,36 @@ import android.widget.ImageButton
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import edu.skku.cs.giftizone.R
+import edu.skku.cs.giftizone.common.BaseModal
 import edu.skku.cs.giftizone.common.toast
 
 class AddTagModal(
     private val context: Context,
     private val tagList: ArrayList<String>,
     private val addTagHandler: (String) -> Unit
-) {
+): BaseModal(context, R.layout.tag_add_modal) {
     private val MAX_TAG_COUNT = 10
     private val MAX_TAG_LENGTH = 5
 
-    private val inflater = LayoutInflater.from(context)
-    private val dialogLayout = inflater.inflate(R.layout.tag_add_modal, null)
     private val confirmTagBtn = dialogLayout.findViewById<Button>(R.id.confirmTagButton)
     private val cancelTagBtn = dialogLayout.findViewById<ImageButton>(R.id.cancelTagButton)
     private val editTextTag = dialogLayout.findViewById<EditText>(R.id.editTextTag)
 
-    private val tagDialog = AlertDialog.Builder(context).create()
-
     init {
-        tagDialog.setView(dialogLayout)
         confirmTagBtn.setOnClickListener {
             val tag = editTextTag.text.toString()
 
             if (!isValidTag(tag)) {
                 return@setOnClickListener
             }
-
             addTagHandler(tag)
-            tagDialog.dismiss()
+            dialog.dismiss()
         }
         cancelTagBtn.setOnClickListener {
-            tagDialog.cancel()
+            dialog.cancel()
         }
-    }
 
-    fun show() {
-        tagDialog.show()
+        dialog.setView(dialogLayout)
     }
 
     private fun isValidTag(tag: String): Boolean {

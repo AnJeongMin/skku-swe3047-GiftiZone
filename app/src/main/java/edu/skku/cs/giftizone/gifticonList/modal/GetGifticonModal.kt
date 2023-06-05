@@ -4,7 +4,10 @@ import android.content.Context
 import android.os.Handler
 import android.os.Looper
 import android.view.LayoutInflater
+import androidx.appcompat.widget.AppCompatButton
+import androidx.appcompat.widget.AppCompatEditText
 import edu.skku.cs.giftizone.R
+import edu.skku.cs.giftizone.common.BaseModal
 import edu.skku.cs.giftizone.common.Gifticon
 import edu.skku.cs.giftizone.common.toast
 import okhttp3.*
@@ -15,24 +18,15 @@ import java.time.LocalDate
 class GetGifticonModal(
     private val context: Context,
     private val addGifticonHandler: (Gifticon) -> Unit,
-) {
-    private val inflater = LayoutInflater.from(context)
-    private val dialogLayout = inflater.inflate(R.layout.get_gifticon_modal, null)
-    private val getGifticonDialog = androidx.appcompat.app.AlertDialog.Builder(context).create()
-    private val getGifticonConfirmBtn = dialogLayout
-        .findViewById<androidx.appcompat.widget.AppCompatButton>(R.id.getGifticonConfirmButton)
-    private val shareId = dialogLayout
-        .findViewById<androidx.appcompat.widget.AppCompatEditText>(R.id.shareIdEdit)
+): BaseModal(context, R.layout.get_gifticon_modal) {
+    private val getGifticonConfirmBtn = dialogLayout.findViewById<AppCompatButton>(R.id.getGifticonConfirmButton)
+    private val shareId = dialogLayout.findViewById<AppCompatEditText>(R.id.shareIdEdit)
 
     init {
-        getGifticonDialog.setView(dialogLayout)
         getGifticonConfirmBtn.setOnClickListener {
             requestGetGifticon(shareId.text.toString())
         }
-    }
-
-    fun show() {
-        getGifticonDialog.show()
+        dialog.setView(dialogLayout)
     }
 
     private fun requestGetGifticon(shareId: String) {
