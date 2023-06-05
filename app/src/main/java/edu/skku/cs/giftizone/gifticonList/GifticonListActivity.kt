@@ -34,8 +34,8 @@ class GifticonListActivity : AppCompatActivity() {
 
     private var sortFilter = SortFilter.LIMIT
 
-    private var tagRecyclerView: RecyclerView? = null
-    private var gifticonRecyclerView: RecyclerView? = null
+    private lateinit var tagRecyclerView: RecyclerView
+    private lateinit var gifticonRecyclerView: RecyclerView
     private val recyclerViewList: ArrayList<RecyclerView> = ArrayList()
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -108,23 +108,23 @@ class GifticonListActivity : AppCompatActivity() {
     private fun setupTagRecycleView() {
         tagRecyclerView = findViewById(R.id.tagListView)
         val layoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
-        tagRecyclerView?.layoutManager = layoutManager
-        tagRecyclerView?.adapter = TagAdapter(tagList, selectedTag) {
+        tagRecyclerView.layoutManager = layoutManager
+        tagRecyclerView.adapter = TagAdapter(tagList, selectedTag) {
             updateGifticonFilter()
         }
 
-        recyclerViewList.add(tagRecyclerView!!)
+        recyclerViewList.add(tagRecyclerView)
     }
 
     private fun setupGifticonRecycleView() {
         gifticonRecyclerView = findViewById(R.id.gifticonListView)
         val layoutManager = LinearLayoutManager(this)
-        gifticonRecyclerView?.layoutManager = layoutManager
-        gifticonRecyclerView?.adapter = GifticonListAdapter(this, gifticonList, selectedTag, sortFilter,
+        gifticonRecyclerView.layoutManager = layoutManager
+        gifticonRecyclerView.adapter = GifticonListAdapter(this, gifticonList, selectedTag, sortFilter,
             { gifticon: Gifticon -> gifticonInfoActivityHandler(gifticon) },
             { gifticon: Gifticon -> gifticonRepository.deleteGifticon(gifticon.id) })
 
-        recyclerViewList.add(gifticonRecyclerView!!)
+        recyclerViewList.add(gifticonRecyclerView)
     }
 
     private fun updateRecycleData() {

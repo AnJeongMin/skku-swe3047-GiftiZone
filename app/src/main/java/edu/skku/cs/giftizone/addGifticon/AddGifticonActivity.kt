@@ -22,7 +22,7 @@ import java.time.LocalDate
 import java.util.*
 
 class AddGifticonActivity : AppCompatActivity() {
-    private var tagList: ArrayList<String>? = null
+    private lateinit var tagList: ArrayList<String>
     private var localImageUrl: Uri? = null
     private var selectedTag: String? = null
     private var expiredDate: LocalDate? = null
@@ -77,7 +77,7 @@ class AddGifticonActivity : AppCompatActivity() {
     }
 
     private fun setupTagSelectDropdown() {
-        tagList = intent.getStringArrayListExtra("tagList")
+        tagList = intent.getStringArrayListExtra("tagList")!!
         val addTagDropdown: Spinner = findViewById(R.id.addTagDropdown)
 
         addTagDropdown.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
@@ -91,7 +91,7 @@ class AddGifticonActivity : AppCompatActivity() {
 
         ArrayAdapter(this,
             android.R.layout.simple_spinner_item,
-            tagList!!)
+            tagList)
             .also { adapter ->
             adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
             addTagDropdown.adapter = adapter

@@ -24,7 +24,7 @@ import java.io.IOException
 import java.util.*
 
 class GifticonInfoActivity : AppCompatActivity() {
-    private var gifticon: Gifticon? = null
+    private lateinit var gifticon: Gifticon
     private val SHARE_DELAY = 60 // 60s
     private var shareDelay = 0
 
@@ -38,24 +38,24 @@ class GifticonInfoActivity : AppCompatActivity() {
     }
 
     private fun setupGifticonInfo() {
-        gifticon = intent.getParcelableExtra("gifticon")
+        gifticon = intent.getParcelableExtra("gifticon")!!
         val gifticonInfoImage = findViewById<ImageView>(R.id.gifticonInfoImage)
-        if (gifticon?.imagePath == "") {
+        if (gifticon.imagePath == "") {
             gifticonInfoImage.setImageResource(R.drawable.baseline_web_asset_off_24)
         } else {
             Glide.with(this)
-                .load(gifticon?.imagePath)
+                .load(gifticon.imagePath)
                 .into(gifticonInfoImage)
         }
         val gifticonInfoBarcode = findViewById<TextView>(R.id.gifticonInfoBarcode)
-        gifticonInfoBarcode.text = gifticon?.barcode
+        gifticonInfoBarcode.text = gifticon.barcode
     }
 
     private fun setupGifticonMapButton() {
         val gifticonMapButton = findViewById<ImageView>(R.id.gifticonInfoMapButton)
         gifticonMapButton.setOnClickListener {
             val intent = Intent(this, GifticonMapActivity::class.java)
-            intent.putExtra("provider", gifticon?.provider)
+            intent.putExtra("provider", gifticon.provider)
             startActivity(intent)
         }
     }
@@ -68,7 +68,7 @@ class GifticonInfoActivity : AppCompatActivity() {
 
             val shareId = getShareId()
             val gifticonShareModal = GifticonShareModal(this, shareId)
-            requestGifticonShare(gifticon!!, shareId)
+            requestGifticonShare(gifticon, shareId)
             gifticonShareModal.show()
         }
     }
