@@ -16,8 +16,7 @@ class GifticonRemoveModal(
     private val gifticon: Gifticon,
     private val removeGifticonHandler: () -> Unit,
 ): BaseModal(context, R.layout.gifticon_remove_modal) {
-    private val cancelRemoveBtn = dialogLayout.findViewById<Button>(R.id.removeGifticonCancelButton)
-    private val confirmRemoveBtn = dialogLayout.findViewById<Button>(R.id.removeGifticonConfirmButton)
+    private val gifticonRemoveBtn = dialogLayout.findViewById<Button>(R.id.removeGifticonCancelButton)
     private val removeGifticonImage = dialogLayout.findViewById<ImageView>(R.id.removeGifticonImage)
     private val removeGifticonProvider = dialogLayout.findViewById<TextView>(R.id.removeGifticonProvider)
     private val removeGifticonContent = dialogLayout.findViewById<TextView>(R.id.removeGifticonContent)
@@ -33,14 +32,12 @@ class GifticonRemoveModal(
         removeGifticonProvider.text = gifticon.provider
         removeGifticonContent.text = gifticon.content
 
-        confirmRemoveBtn.setOnClickListener {
+        gifticonRemoveBtn.setOnClickListener {
             removeGifticonHandler()
             deleteGifticonImageFile(gifticon.imagePath)
             dialog.dismiss()
         }
-        cancelRemoveBtn.setOnClickListener {
-            dialog.cancel()
-        }
+
         dialog.setView(dialogLayout)
     }
 
