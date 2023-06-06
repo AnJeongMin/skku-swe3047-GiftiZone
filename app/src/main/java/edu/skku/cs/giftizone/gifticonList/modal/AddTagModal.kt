@@ -20,7 +20,6 @@ class AddTagModal(
     private val MAX_TAG_LENGTH = 5
 
     private val confirmTagBtn = dialogLayout.findViewById<Button>(R.id.confirmTagButton)
-    private val cancelTagBtn = dialogLayout.findViewById<ImageButton>(R.id.cancelTagButton)
     private val editTextTag = dialogLayout.findViewById<EditText>(R.id.editTextTag)
 
     init {
@@ -32,9 +31,6 @@ class AddTagModal(
             }
             addTagHandler(tag)
             dialog.dismiss()
-        }
-        cancelTagBtn.setOnClickListener {
-            dialog.cancel()
         }
 
         dialog.setView(dialogLayout)
