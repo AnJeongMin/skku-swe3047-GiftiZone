@@ -60,6 +60,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="16dp"
+        android:layout_marginBottom="-4dp"
         android:text="만료 시간"
         app:layout_constraintBottom_toBottomOf="@+id/gifticonImage"
         app:layout_constraintEnd_toEndOf="parent" />
@@ -78,8 +79,10 @@
 
     <ImageButton
         android:id="@+id/gifticonRemoveButton"
-        android:layout_width="32dp"
-        android:layout_height="32dp"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:layout_marginTop="-4dp"
+        android:layout_marginEnd="-4dp"
         android:background="@android:color/transparent"
         app:layout_constraintEnd_toEndOf="@+id/expireDateText"
         app:layout_constraintTop_toTopOf="@+id/gifticonImage"
